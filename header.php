@@ -22,6 +22,7 @@
 
             ?>
         </ul>
+
         <ul class="side-nav" id="mobile-demo">
             <li><a href="catalog.php">Catalog</a></li>
             <?php
