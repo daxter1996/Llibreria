@@ -12,9 +12,8 @@
 </head>
 <header>
     <?php include_once "header.php"; ?>
-    <?php include_once "classes/prova.php"; ?>
     <?php
-        $llibre = $library->findBookById($_GET["id"])
+        $llibre = $library->getBookById($_GET["id"])
     ?>
 </header>
 <body>
@@ -34,7 +33,7 @@
         </div>
         <div class="row">
             <div class="col s12 m6 offset-m1">
-                <a class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">bookmark</i>Bookoing</a>
+                <a href='booking.php?id=<?php echo $_GET['id'];?>' class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">bookmark</i>Bookoing</a>
             </div>
         </div>
 </div>

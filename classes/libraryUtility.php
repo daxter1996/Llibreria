@@ -19,7 +19,6 @@ class Utility {
 
     public function getAllContentFromBd(){
         $con = $this->bdConect();
-
         $sql = "SELECT * FROM items";
         $result = mysql_query("$sql");
         if ($result === false) {
@@ -30,7 +29,28 @@ class Utility {
                     array_push($content, new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
                 } elseif ($row["type"] == 2) {
                     array_push($this->content, new dvd($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["description"]));
+                } elseif ($row["type"] == 3) {
+                    array_push($this->content, new magazine($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
                 }
+            }
+        }
+        mysql_close($con);
+    }
+
+    public function getBookById($id){
+        $con = $this->bdConect();
+        $sql = "SELECT * FROM items Where id = ".$id;
+        $result = mysql_query("$sql");
+        if ($result === false) {
+            echo "No results found";
+        } else {
+            $row = mysql_fetch_assoc($result);
+            if ($row["type"] == 0) {
+                return new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]);
+            } elseif ($row["type"] == 2) {
+                return new dvd($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["description"]);
+            } elseif ($row["type"] == 3) {
+                return new magazine($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]);
             }
         }
         mysql_close($con);

@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Library</title>
+    <link rel="icon" href="img/favIcon.png" type="image/x-icon">
     <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!--Import materialize.css-->
@@ -21,9 +22,8 @@
 <br/>
 <div class="containter">
     <div class="row">
-        <div class="col s12 m6 offset-m1">
-            <h1>Library</h1>
-            <p>Libray description</p>
+        <div class="col s12 m10 offset-m1 center">
+            <h2>Welcome to your Library <i class="material-icons medium">book</i></h2>
         </div>
 
     </div>

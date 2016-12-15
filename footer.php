@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Library</h5>
-                <p class="grey-text text-lighten-4">Texto aqui</p>
+                <h5 class="white-text">Jesus's Library </h5>
+                <p class="grey-text text-lighten-4"></p>
             </div>
             <div class="col l4 offset-l2 s12">
                 <h5 class="white-text">Links</h5>
