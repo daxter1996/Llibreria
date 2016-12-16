@@ -26,12 +26,12 @@
                 }
                 if($row['usertype']=="admin"){
                     session_start();
-                    $_SESSION["user_id"] = new admin($row["id"],$row["name"],$row["surname"],"",$row["address"],$row["password"],$row["dni"],$row["email"]);;
+                    $_SESSION["user_id"] = new admin($row["id"],$row["name"],$row["surname"],"",$row["address"],$row["password"],$row["dni"],$row["email"]);
                     header("Location: index.php");
 
                 }if($row['usertype']=="librarian"){
                     session_start();
-                    $_SESSION["user_id"] = new librarian($row["id"],$row["name"],$row["surname"],"",$row["address"],$row["password"],$row["dni"],$row["email"]);;
+                    $_SESSION["user_id"] = new librarian($row["id"],$row["name"],$row["surname"],"",$row["address"],$row["password"],$row["dni"],$row["email"]);
                     header("Location: index.php");
                 }
             } else {

@@ -1,9 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Library</title>
+    <link rel="icon" href="img/favIcon.png" type="image/x-icon">
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 <nav>
     <div class="nav-wrapper blue-grey">
         <a href="index.php" class="brand-logo center">Jesus's Library</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="catalog.php">Catalog</a></li>
+            <li><a href="catalog.php">Catalogue</a></li>
             <?php
             include_once "classes/libraryUtility.php";
             $library = new Utility();
@@ -22,7 +34,6 @@
 
             ?>
         </ul>
-
         <ul class="side-nav" id="mobile-demo">
             <li><a href="catalog.php">Catalog</a></li>
             <?php

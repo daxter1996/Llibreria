@@ -88,7 +88,8 @@ class Utility {
     public function findBookByAuthor($author){
         $array = [];
         foreach ($this->content as $value){
-            if(strtolower($value->getAuthor()) == strtolower($author)){
+            $pos = strpos(strtolower($value->getAuthor()), strtolower($author));
+            if(strtolower($value->getAuthor()) == strtolower($author) | $pos !== false){
                 array_push($array,$value);
             }
         }
@@ -109,7 +110,8 @@ class Utility {
     public function findBookBySubject($subject){
         $array = [];
         foreach ($this->content as $value){
-            if(strtolower($value->getSubject()) == strtolower($subject)){
+            $pos = strpos(strtolower($value->getSubject()), strtolower($subject));
+            if(strtolower($value->getSubject()) == strtolower($subject) | $pos !== false){
                 array_push($array,$value);
             }
         }

@@ -43,11 +43,6 @@
             <input type="date" class="datepicker" name="firstD" id="returnD">
         </form>
     </div>
-    <div class="row">
-        <div class="col s12 m6 offset-m1">
-            <a href='booking.php?id=<?php echo $_GET['id'];?>' class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">bookmark</i>Bookoing</a>
-        </div>
-    </div>
 </div>
 
 

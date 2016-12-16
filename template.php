@@ -1,15 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Catalog</title>
-    <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
-    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-
-    <!--Let browser know website is optimized for mobile-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-</head>
 <header>
     <?php include_once "header.php"; ?>
     <?php
@@ -33,7 +21,14 @@
         </div>
         <div class="row">
             <div class="col s12 m6 offset-m1">
-                <a href='booking.php?id=<?php echo $_GET['id'];?>' class="waves-effect waves-light btn blue-grey darken-1"><i class="material-icons left">bookmark</i>Bookoing</a>
+                <?php
+                if(isset($_SESSION["user_id"]) &&  $_SESSION["user_id"] instanceof admin) {
+                    echo "<a href='booking.php?id=". $_GET['id']."' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
+                }
+                ?>
+
+
+
             </div>
         </div>
 </div>

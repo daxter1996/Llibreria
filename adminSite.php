@@ -54,7 +54,7 @@
                     </div>
                 </form>
                 <hr>
-                <h5>Unregister User</h5>
+                <h5>Delate User</h5>
                 <form method="post" action="adminSite.php" class="col m12">
                     <div class="row">
                         <div class="input-field col s12">
@@ -72,7 +72,7 @@
 
             </div>
             <div class="col m10 s12 z-depth-2" style="padding-top: 10px;">
-                <h4>Manage Catalog</h4>
+                <h4>Manage Catalogue</h4>
                 <hr>
                 <h5>Add Element</h5>
                 <form method="post" action="datos.php" class="col">
