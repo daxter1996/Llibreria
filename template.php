@@ -1,9 +1,7 @@
-<header>
     <?php include_once "header.php"; ?>
     <?php
         $llibre = $library->getBookById($_GET["id"])
     ?>
-</header>
 <body>
 <br/>
 <div class="containter">

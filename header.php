@@ -15,6 +15,7 @@ session_start();
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
+<header>
 <nav>
     <div class="nav-wrapper blue-grey">
         <a href="index.php" class="brand-logo center">Jesus's Library</a>
@@ -22,10 +23,10 @@ session_start();
         <ul class="right hide-on-med-and-down">
             <li><a href="catalog.php">Catalogue</a></li>
             <?php
-            if(isset($_SESSION["user_id"]) &&  $_SESSION["user_id"] instanceof admin) {
-                echo "<li><a href='adminSite.php'>Admin Site</a></li>";
-            }
             if(isset($_SESSION["user_id"])) {
+                if($_SESSION["user_id"] instanceof admin || $_SESSION["user_id"] instanceof librarian) {
+                    echo "<li><a href='adminSite.php'>Admin Site</a></li>";
+                }
                 echo "<li><a href='close.php'>Close session</a></li>";
                 echo "<li><a href='userTemplate.php'>Profile</a></li>";
             }else{
@@ -58,3 +59,4 @@ session_start();
         $(".button-collapse").sideNav();
     </script>
 </nav>
+    </header>

@@ -20,11 +20,11 @@ class Utility {
     public function getAllContentFromBd(){
         $con = $this->bdConect();
         $sql = "SELECT * FROM items";
-        $result = mysql_query("$sql");
+        $result = $con->query($sql);
         if ($result === false) {
             echo "No results found";
         } else {
-            while ($row = mysql_fetch_assoc($result)) {
+            while ($row = $result->fetch_assoc()) {
                 if ($row["type"] == 0) {
                     array_push($content, new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
                 } elseif ($row["type"] == 2) {
@@ -34,17 +34,17 @@ class Utility {
                 }
             }
         }
-        mysql_close($con);
+        $con->close();
     }
 
     public function getBookById($id){
         $con = $this->bdConect();
         $sql = "SELECT * FROM items Where id = ".$id;
-        $result = mysql_query("$sql");
+        $result = $con->query($sql);
         if ($result === false) {
             echo "No results found";
         } else {
-            $row = mysql_fetch_assoc($result);
+            $row = $result->fetch_assoc();
             if ($row["type"] == 0) {
                 return new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]);
             } elseif ($row["type"] == 2) {
@@ -57,16 +57,16 @@ class Utility {
     }
 
     public function bdConect(){
-        if (!$enlace = mysql_connect('localhost', 'root', '')) {
-            echo 'No pudo conectarse a mysql';
-            exit;
-        }
+        $servername = "localhost";
+        $username = "root";
+        $password = "";
+        $dbname = "testLlibreria";
+        $conn = new mysqli($servername, $username, $password, $dbname);
 
-        if (!mysql_select_db('testllibreria', $enlace)) {
-            echo 'No pudo seleccionar la base de datos';
-            exit;
+        if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
         }
-        return $enlace;
+        return $conn;
     }
 
     public function findBookById($id){
@@ -117,4 +117,43 @@ class Utility {
         }
         return $array;
     }
+
+    function insertBd($insert){
+        $bd = $this->bdConect();
+        $bd->query($insert);
+        $bd->close();
+    }
+
+    function returnFromBd($sql){
+        $bd = $this->bdConect();
+
+        $result = $bd->query($sql);
+        if ($result === false) {
+            echo "No hi ha resultats";
+        } else {
+            $row = $result->fetch_assoc();
+        }
+        $bd->close();
+        return $row;
+    }
+
+    function login($user, $password){
+        $bd = $this->bdConect();
+        $sql = "select * from users where username = '".$user."'";
+
+        $result = $bd->query($sql);
+        if ($result === false) {
+            echo "No hi ha resultats";
+        } else {
+            $row = $result->fetch_assoc();
+            if ($row['password'] == $password) {
+                $bd->close();
+                return true;
+            }else{
+                $bd->close();
+                echo false;
+            }
+        }
+    }
+
 }

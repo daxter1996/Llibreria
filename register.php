@@ -1,6 +1,4 @@
-<header>
-    <?php include_once "header.php"; ?>
-</header>
+<?php include_once "header.php"; ?>
 <body>
 <br/>
 <div class="containter">

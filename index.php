@@ -1,10 +1,4 @@
-<header>
-   <?php include_once "header.php";
-   /*if($_SESSION["user_id"] instanceof admin){
-       echo $_SESSION["user_id"];
-   }*/
-   ?>
-</header>
+<?php include_once "header.php";?>
 <body>
 <br/>
 <div class="containter">
