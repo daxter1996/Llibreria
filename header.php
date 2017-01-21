@@ -1,3 +1,8 @@
+<?php
+include_once "classes/libraryUtility.php";
+$library = new Utility();
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,9 +22,6 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="catalog.php">Catalogue</a></li>
             <?php
-            include_once "classes/libraryUtility.php";
-            $library = new Utility();
-            session_start();
             if(isset($_SESSION["user_id"]) &&  $_SESSION["user_id"] instanceof admin) {
                 echo "<li><a href='adminSite.php'>Admin Site</a></li>";
             }
