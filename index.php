@@ -21,7 +21,8 @@
                 echo "<div class='col s12 m3'>";
                 echo "<div class='card'>";
                 echo "<div class='card-image'>";
-                echo "<img src='img/portada_" . $value->getId() . ".jpg'>";
+                $fileName = glob("img/item/portada_".$value->getId().".*");
+                echo "<img src='".$fileName[0]."'>";
                 echo "</div>";
                 echo "<div class='card-content'style='min-height: 300px;'>";
                 echo "<h5>" . $value->getTitle() . "</h5>";

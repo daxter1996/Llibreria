@@ -23,11 +23,13 @@
                 </div>
             </div>
         </div>
-        <form class="col m5 s12">
+        <form class="col m5 s12 z-depth-2" style="padding: 20px;" method="post" action="datos.php">
             <h5>First Day</h5>
             <input type="date" class="datepicker" name="firstD" id="firstDay">
             <h5>Return Day</h5>
-            <input type="date" class="datepicker" name="firstD" id="returnD">
+            <input type="date" class="datepicker" name="returnD" id="returnD">
+            <input type="hidden" name="id" value="<?php echo $_GET["id"] ?>">
+            <input class="btn blue-grey darken-1" type="submit" name="book" value="Book">
         </form>
     </div>
 </div>
@@ -41,6 +43,7 @@
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month
         selectYears: 15 // Creates a dropdown of 15 years to control year
+        format: 'yyyy-mm-dd'
     });
 </script>
 </body>

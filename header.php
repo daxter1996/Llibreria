@@ -8,12 +8,11 @@ session_start();
 <head>
     <title>Library</title>
     <link rel="icon" href="img/favIcon.png" type="image/x-icon">
-    <!--Import Google Icon Font-->
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!--Import materialize.css-->
     <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-    <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <script src="css/jquery.js"></script>
+    <script src="js/javascript.js"></script>
 </head>
 <header>
 <nav>
@@ -24,11 +23,14 @@ session_start();
             <li><a href="catalog.php">Catalogue</a></li>
             <?php
             if(isset($_SESSION["user_id"])) {
-                if($_SESSION["user_id"] instanceof admin || $_SESSION["user_id"] instanceof librarian) {
+                if($_SESSION["user_id"] instanceof admin) {
                     echo "<li><a href='adminSite.php'>Admin Site</a></li>";
                 }
-                echo "<li><a href='close.php'>Close session</a></li>";
+                if($_SESSION["user_id"] instanceof librarian) {
+                    echo "<li><a href='librarianSite.php'>Librarian Site</a></li>";
+                }
                 echo "<li><a href='userTemplate.php'>Profile</a></li>";
+                echo "<li><a href='close.php'>Close session</a></li>";
             }else{
                 echo "<li><a href='login.php'>Login</a></li>";
                 echo "<li><a href='register.php'>Register</a></li>";

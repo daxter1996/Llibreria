@@ -1,0 +1,46 @@
+Comments for Jesús Liz
+----------------------
+
+Mark => 65/100
+
+User Manual => 90/100
+-----------
+- Quite complete
+
+
+Technical Manual => 80/100
+----------------
+- Very complete
+- Next manual must keep being thorough and structured. You need to explain the problems you have faced and how you have solved them.
+- Besides, you need to explain to me what can I do to see the better points of your work.
+
+
+Completeness => 83/100
+------------
+- The template for books and users is not complete
+- The logo is not original. Other students have used the same.
+- No library parameters
+
+
+Performance => 0/100
+-----------
+- session_start is giving a warning. You are sending data before calling it. Then, it can't work! This is an important problem you should have detected before.
+- All your pages have this problem. I can't navigate through them... I have had to unset warning display to be able to see your site.
+- You need to unset the session cookie when logging out
+
+
+Smartness => 25/100
+---------
+- You are using mysql to work with the database (not pdo or mysqli). Remember it is deprecated!
+- Why are you using "include_once" and not "require_once" for very important documents?
+- You are accessing the db through two (at least) different ways. That's not good.
+- The problems with your warnings are bad for this section too.
+- On the other hand, your classes structure is promising.
+- You are not filtering user information. High risk of injection!
+- Your solution for login failure is clearly improvable.
+
+
+Usability and design => 65/100
+--------------------
+- A greater part of your work comes from a third party. There's a little part directly created by you. So, I have to be tough.
+- A lot of lost space just under the navigation bar (because of the warnings the system is sending)

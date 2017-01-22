@@ -7,9 +7,7 @@ include_once("magazine.php");
 include_once("user.php");
 
 class Utility {
-
     private $content = [];
-
     public function getContent(){return $this->content;}
     public function setContent($content){$this->content = $content;}
 
@@ -18,15 +16,15 @@ class Utility {
     }
 
     public function getAllContentFromBd(){
-        $con = $this->bdConect();
+        $con = bdConect();
         $sql = "SELECT * FROM items";
         $result = $con->query($sql);
         if ($result === false) {
             echo "No results found";
         } else {
             while ($row = $result->fetch_assoc()) {
-                if ($row["type"] == 0) {
-                    array_push($content, new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
+                if ($row["type"] == 1) {
+                    array_push($this->content, new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
                 } elseif ($row["type"] == 2) {
                     array_push($this->content, new dvd($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["description"]));
                 } elseif ($row["type"] == 3) {
@@ -38,14 +36,14 @@ class Utility {
     }
 
     public function getBookById($id){
-        $con = $this->bdConect();
+        $con = bdConect();
         $sql = "SELECT * FROM items Where id = ".$id;
         $result = $con->query($sql);
         if ($result === false) {
             echo "No results found";
         } else {
             $row = $result->fetch_assoc();
-            if ($row["type"] == 0) {
+            if ($row["type"] == 1) {
                 return new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]);
             } elseif ($row["type"] == 2) {
                 return new dvd($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["description"]);
@@ -54,19 +52,6 @@ class Utility {
             }
         }
         mysql_close($con);
-    }
-
-    public function bdConect(){
-        $servername = "localhost";
-        $username = "root";
-        $password = "";
-        $dbname = "testLlibreria";
-        $conn = new mysqli($servername, $username, $password, $dbname);
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        return $conn;
     }
 
     public function findBookById($id){
@@ -117,43 +102,51 @@ class Utility {
         }
         return $array;
     }
+}//End Of Class
 
-    function insertBd($insert){
-        $bd = $this->bdConect();
-        $bd->query($insert);
-        $bd->close();
+
+function insertBd($insert){
+    $bd = bdConect();
+    $bd->query($insert);
+    $bd->close();
+}
+
+ function bdConect(){
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "testLlibreria";
+    $conn = new mysqli($servername, $username, $password, $dbname);
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
     }
+    return $conn;
+}
 
-    function returnFromBd($sql){
-        $bd = $this->bdConect();
-
-        $result = $bd->query($sql);
-        if ($result === false) {
-            echo "No hi ha resultats";
-        } else {
-            $row = $result->fetch_assoc();
-        }
-        $bd->close();
-        return $row;
-    }
-
-    function login($user, $password){
-        $bd = $this->bdConect();
-        $sql = "select * from users where username = '".$user."'";
-
-        $result = $bd->query($sql);
-        if ($result === false) {
-            echo "No hi ha resultats";
-        } else {
-            $row = $result->fetch_assoc();
-            if ($row['password'] == $password) {
-                $bd->close();
-                return true;
-            }else{
-                $bd->close();
-                echo false;
-            }
+function returnArrayFrombd($sql){
+    $array = array();
+    $bd = bdConect();
+    $result = $bd->query($sql);
+    if ($result === false) {
+        echo "No hi ha resultats";
+    } else {
+        while ($row = $result->fetch_assoc()) {
+            array_push($array,$row);
         }
     }
+    $bd->close();
+    return $array;
+}
 
+function returnFromBd($sql){
+    $bd = bdConect();
+    $result = $bd->query($sql);
+    if ($result === false) {
+        $bd->close();
+        return "";
+    } else {
+        $row = $result->fetch_assoc();
+    }
+    $bd->close();
+    return $row;
 }

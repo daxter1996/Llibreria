@@ -7,8 +7,6 @@
     include_once("classes/user.php");
     session_start();
     include_once ("classes/libraryUtility.php");
-    //INSERT INTO user VALUES ("","asf","asf","asd","sdf","sdf","sdf","fsfd")
-
 
 
 if(isset($_POST["register"])) {
@@ -20,6 +18,20 @@ if(isset($_POST["login"])) {
 if(isset($_POST["editProfile"])) {
     editProfile();
 }
+if(isset($_POST["book"])) {
+    book();
+}
+if(isset($_GET["return"])) {
+    returnBook();
+}
+
+//DELETE FROM `booking` WHERE idBook = 1
+function book(){
+    $library = new Utility();
+    $query = "INSERT INTO booking VALUES ('".$_POST["id"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
+    $library->insertBd($query);
+    header("Location: template.php?id=".$_POST["id"]);
+}
 
 
 function register(){
@@ -29,41 +41,12 @@ function register(){
     header("Location: index.php");
 }
 
-function login(){
-    $library = new Utility();
-    $sql = "SELECT * FROM user WHERE email = '" . $_POST["email"] . "'";
-    $row = $library->returnFromBd($sql);
 
-    if ($row['password'] == $_POST["password"]) {
-        if ($row['usertype'] == "peasant") {
-            session_start();
-            $_SESSION["user_id"] = new user($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-            header("Location: index.php");
-        }
-        if ($row['usertype'] == "admin") {
-            session_start();
-            $_SESSION["user_id"] = new admin($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-            header("Location: index.php");
-        }
-        if ($row['usertype'] == "librarian") {
-            session_start();
-            $_SESSION["user_id"] = new librarian($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-            header("Location: index.php");
-        }
-    } else {
-        echo "Hmmmm algo esta malament";
-    }
-}
-
-function editProfile(){
+function returnBook(){
     $library = new Utility();
-    $sql = "UPDATE user SET name=('".$_POST["name"]."'), surname=('".$_POST["surname"] ."'), dni=('".$_POST["dni"] ."'), address=('".$_POST["address"] ."') WHERE email = '". $_SESSION["user_id"]->getEmail() ."'";
+    $sql = "DELETE FROM booking WHERE idBook = " . $_GET["return"];
     $library->insertBd($sql);
-    $_SESSION["user_id"]->setName($_POST["name"]);
-    $_SESSION["user_id"]->setSurname($_POST["surname"]);
-    $_SESSION["user_id"]->setAddress($_POST["address"]);
-    $_SESSION["user_id"]->setDni($_POST["dni"]);
-    header("Location: userTemplate.php");
+    header("Location: template.php?id=".$_GET["return"]);
 }
 
 ?>
