@@ -16,7 +16,7 @@ if(isset($_GET["deleteUserList"])){
 if(isset($_GET["deleteUser"])){
     deleteUser();
 }
-/*Register User*/
+/*Register User AdminSite*/
 if(isset($_GET["registerName"])){
     register();
 }
@@ -42,6 +42,57 @@ if(isset($_POST["hies"])){
 /*SearchItem*/
 if(isset($_GET["searchName"])){
     searchItem();
+}
+/*Register User*/
+if(isset($_POST["registerUser"])){
+    registerUser();
+}
+/*BookingForm*/
+if(isset($_POST["bookId"])){
+    bookItem();
+}
+/*ReturnItem*/
+if(isset($_GET["returnId"])){
+   returnBook();
+}
+
+function returnBook(){
+    $sql = "DELETE FROM booking WHERE idBook = " . $_GET["returnId"];
+    if(insertBd($sql)){
+        echo "Thanks!";
+        exit();
+    }else{
+        echo "Error!";
+        exit();
+    }
+}
+
+function bookItem(){
+    if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
+        $query = "INSERT INTO booking VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
+        if(insertBd($query)){
+            echo "Booked!";
+            exit();
+        }else{
+            echo "Something goes wrong";
+            exit();
+        }
+    }else{
+        echo "Format of date invalid";
+        exit();
+    }
+}
+
+function registerUser(){
+    $query = "INSERT INTO user VALUES ('','". $_POST["name"] ."','". $_POST["surname"] ."','". $_POST["email"] ."','". $_POST["password"] ."','". $_POST["address"] ."','". $_POST["dni"] ."','user')";
+    if(insertBd($query)){
+        echo "Register OK!";
+        exit();
+    }else{
+        echo "Email is already registered";
+        exit();
+    }
+
 }
 
 function searchItem(){
@@ -109,8 +160,6 @@ function searchItem(){
     }
 }
 
-/*Array ( [hies] => [title] => sdf [author] => afsd [subject] => asdf [company] => asdf [year] => 132 [editionNumber] => 213 [isbn] => 123 [state] => Good [type] => 2 [description] => da )
-Array ( [mainPhoto] => Array ( [name] => [type] => [tmp_name] => [error] => 4 [size] => 0 ) [inPhoto] => Array ( [name] => [type] => [tmp_name] => [error] => 4 [size] => 0 ) ) 1*/
 function addElement(){
     $sql = "Insert into items VALUES ('','".$_POST["title"]."','".$_POST["author"]."','".$_POST["subject"]."','".$_POST["company"]."','".$_POST["year"]."','".$_POST["editionNumber"]."','".$_POST["state"]."','".$_POST["description"]."','5','".$_POST["isbn"]."','".$_POST["type"]."')";
     insertBd($sql);
@@ -164,22 +213,23 @@ function login(){
 
 /*Delete Items*/
 function suggestRemove(){
-    $bd = bdConect();
-    $itemList = $_GET['removeItems'];
-    $sql = "select title,id from items where title like '$itemList%'";
-    $res = $bd->query($sql);
-    while($row = $res->fetch_assoc()){
-        echo "<option value='".$row["title"]." id=".$row["id"]."'>";
-        exit();
+    $library = new Utility();
+    $arraySearch = $library->findBookByTitle($_GET["removeItems"]);
+    foreach ($arraySearch as $row){
+        echo "<option value='".$row->getTitle()." id=".$row->getId()."'>";
     }
-    $bd->close();
+    exit();
 }
 
 function removeItem(){
     $id = end(explode("=",$_GET["deleteItemName"]));
     $sql = "DELETE FROM items WHERE id = " . $id;
-    insertBd($sql);
-    echo "Item removed " . $id;
+    if(insertBd($sql)){
+        echo "Item removed " . $id;
+    }else{
+        echo "Error";
+    }
+
 }
 /*Delete Users*/
 

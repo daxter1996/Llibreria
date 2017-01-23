@@ -26,36 +26,9 @@ if(isset($_GET["return"])) {
 }
 
 //DELETE FROM `booking` WHERE idBook = 1
-function book(){
-    $library = new Utility();
-    $query = "INSERT INTO booking VALUES ('".$_POST["id"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
-    $library->insertBd($query);
-    header("Location: template.php?id=".$_POST["id"]);
-}
-
 
 function register(){
-    $library = new Utility();
-    $query = "INSERT INTO user VALUES ('','". $_POST["name"] ."','". $_POST["surname"] ."','". $_POST["email"] ."','". $_POST["password"] ."','". $_POST["address"] ."','". $_POST["dni"] ."','peasant')";
-    $library->insertBd($query);
-    header("Location: index.php");
+    $query = "INSERT INTO user VALUES ('','" . $_POST["name"] . "','" . $_POST["surname"] . "','" . $_POST["email"] . "','" . $_POST["password"] . "','" . $_POST["address"] . "','" . $_POST["dni"] . "','peasant')";
+    insertBd($query);
 }
-
-
-function returnBook(){
-    $library = new Utility();
-    $sql = "DELETE FROM booking WHERE idBook = " . $_GET["return"];
-    $library->insertBd($sql);
-    header("Location: template.php?id=".$_GET["return"]);
-}
-
 ?>
-
-
-
-
-
-
-
-
-

@@ -64,7 +64,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                                         <option value="admin">Admin</option>
                                         <option value="librarian">Librarian</option>
                                     </select>
-                                    <label>Materialize Select</label>
+                                    <label>User Type</label>
                                 </div>
                                 <div class="input-field col s12 m6">
                                     <input class="btn blue-grey" id="registerUserBtn" type="submit" class="validate" value="Register" required>
@@ -80,7 +80,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                             <input type="text" list="userList" name="deleteUserList" id="userListSuggest" class="validate">
                             <datalist id="userList">
                             </datalist>
-                            <label for="userList">ID</label>
+                            <label for="userList">Email</label>
                         </div>
                         <div class="input-field col s12">
                             <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteUserBtn" type="submit" name="deleteUser" class="validate" value="Delete">
@@ -157,7 +157,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                                     <option value="1">Book</option>
                                     <option value="3">Magazine</option>
                                 </select>
-                                <label>State</label>
+                                <label>Type</label>
                             </div>
                             <div class="file-field input-field col s12">
                                 <div class="btn">

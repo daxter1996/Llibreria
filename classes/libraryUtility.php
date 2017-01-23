@@ -107,8 +107,11 @@ class Utility {
 
 function insertBd($insert){
     $bd = bdConect();
-    $bd->query($insert);
+    if(!$bd->query($insert)){
+        return false;
+    }
     $bd->close();
+    return true;
 }
 
  function bdConect(){
