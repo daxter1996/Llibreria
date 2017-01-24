@@ -61,6 +61,9 @@
             <input type="submit" class="waves-effect btn blue-grey">
         </form>
     </div>
+    <div class="modal-footer">
+        <a href="#!" class=" modal-action modal-close waves-effect waves-red btn red lighten-3">Cancel</a>
+    </div>
 </div>
 
 <!--Import jQuery before materialize.js-->
