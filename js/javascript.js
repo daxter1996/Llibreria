@@ -61,7 +61,7 @@ function cancelEdit() {
                 success: function (data) {
                     Materialize.toast(data, 4000);
                 }, error: function () {
-                    alert("okey");
+                    alert("Fallo de JS");
                 }
             });
         });

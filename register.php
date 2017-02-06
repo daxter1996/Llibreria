@@ -43,20 +43,20 @@
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('select').material_select();
-    });
-    $(document).ready(function() {
-        $('input#input_text, textarea#textarea1').characterCounter();
-    });
-    $(document).ready(function(){
-        $('ul.tabs').tabs();
-    });
-    $(document).ready(function(){
-        $('.tooltipped').tooltip({delay: 50});
-    });
-</script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('select').material_select();
+        });
+        $(document).ready(function() {
+            $('input#input_text, textarea#textarea1').characterCounter();
+        });
+        $(document).ready(function(){
+            $('ul.tabs').tabs();
+        });
+        $(document).ready(function(){
+            $('.tooltipped').tooltip({delay: 50});
+        });
+    </script>
 
 </body>
 <?php include_once "footer.php"; ?>

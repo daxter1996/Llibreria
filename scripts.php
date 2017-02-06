@@ -37,7 +37,7 @@ if(isset($_GET["login"])){
 }
 /*Add Item)*/
 if(isset($_POST["hies"])){
-    addElement();
+    $_SESSION["user_id"]->addElement($_POST["title"], $_POST["author"], $_POST["subject"], $_POST["company"], $_POST["year"], $_POST["editionNumber"], $_POST["state"], $_POST["description"], $_POST["isbn"], $_POST["type"]);
 }
 /*SearchItem*/
 if(isset($_GET["searchName"])){
@@ -163,36 +163,6 @@ function searchItem(){
     }
 }
 
-function addElement(){
-    $db = new DB();
-    $sql = "Insert into items VALUES ('','".$_POST["title"]."','".$_POST["author"]."','".$_POST["subject"]."','".$_POST["company"]."','".$_POST["year"]."','".$_POST["editionNumber"]."','".$_POST["state"]."','".$_POST["description"]."','5','".$_POST["isbn"]."','".$_POST["type"]."')";
-    $db->insertBd($sql);
-    $return = $db->returnFromBd("SELECT * FROM items ORDER BY id DESC LIMIT 1");
-
-    $check = getimagesize($_FILES["inPhoto"]["tmp_name"]);
-    $check1 = getimagesize($_FILES["mainPhoto"]["tmp_name"]);
-    $target_dir = "img/item/";
-    $file_ext = strtolower(end(explode('.', $_FILES['mainPhoto']['name'])));
-
-    if ($check !== false && $check1 !== false) {
-        $target_file_content = $target_dir . "content_" . $return["id"] . '.' . $file_ext;
-        $target_file_main = $target_dir . "portada_". $return["id"] . '.' . $file_ext;
-        if (file_exists($target_file_main) || file_exists($target_file_content)) {
-            unlink($target_file_main);
-            unlink($target_file_content);
-        }
-        move_uploaded_file($_FILES["mainPhoto"]["tmp_name"], $target_file_main);
-        move_uploaded_file($_FILES["inPhoto"]["tmp_name"], $target_file_content);
-
-        echo 'Files was uploaded.';
-        exit();
-    } else {
-        echo 'File is not an image.';
-        exit();
-    }
-    echo 'Some error';
-}
-
 function login(){
     $db = new DB();
     $sql = "SELECT * FROM user WHERE email = '" . $_GET["email"] . "'";
@@ -247,7 +217,7 @@ function suggestRemoveUser(){
     foreach($res as $value){
         echo "<option value='".$value["email"]."'>";
     }
-    die();
+    exit();
 }
 
 function deleteUser(){
@@ -284,7 +254,7 @@ function returnInfo(){
     $array = $db->returnArrayFrombd($sql);
     if(empty($array)){
         echo "Nothing to return Today";
-        die();
+        exit();
     }
     foreach ($array as $value){
         echo "<hr/>Item ID: ". $value["id"]."<br/>Title: ". $value["title"] ."<br/>User email: " . $value["email"];
