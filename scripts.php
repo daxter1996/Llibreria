@@ -57,8 +57,9 @@ if(isset($_GET["returnId"])){
 }
 
 function returnBook(){
+    $db = new DB();
     $sql = "DELETE FROM booking WHERE idBook = " . $_GET["returnId"];
-    if(insertBd($sql)){
+    if($db->insertBd($sql)){
         echo "Thanks!";
         exit();
     }else{
@@ -68,9 +69,10 @@ function returnBook(){
 }
 
 function bookItem(){
+    $db = new DB();
     if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
-        $query = "INSERT INTO booking VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
-        if(insertBd($query)){
+        $sql = "INSERT INTO booking VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
+        if($db->insertBd($sql)){
             echo "Booked!";
             exit();
         }else{
@@ -84,8 +86,9 @@ function bookItem(){
 }
 
 function registerUser(){
-    $query = "INSERT INTO user VALUES ('','". $_POST["name"] ."','". $_POST["surname"] ."','". $_POST["email"] ."','". $_POST["password"] ."','". $_POST["address"] ."','". $_POST["dni"] ."','user')";
-    if(insertBd($query)){
+    $db = new DB();
+    $sql = "INSERT INTO user VALUES ('','". $_POST["name"] ."','". $_POST["surname"] ."','". $_POST["email"] ."','". $_POST["password"] ."','". $_POST["address"] ."','". $_POST["dni"] ."','user')";
+    if($db->insertBd($sql)){
         echo "Register OK!";
         exit();
     }else{
@@ -161,9 +164,10 @@ function searchItem(){
 }
 
 function addElement(){
+    $db = new DB();
     $sql = "Insert into items VALUES ('','".$_POST["title"]."','".$_POST["author"]."','".$_POST["subject"]."','".$_POST["company"]."','".$_POST["year"]."','".$_POST["editionNumber"]."','".$_POST["state"]."','".$_POST["description"]."','5','".$_POST["isbn"]."','".$_POST["type"]."')";
-    insertBd($sql);
-    $return = returnFromBd("SELECT * FROM items ORDER BY id DESC LIMIT 1");
+    $db->insertBd($sql);
+    $return = $db->returnFromBd("SELECT * FROM items ORDER BY id DESC LIMIT 1");
 
     $check = getimagesize($_FILES["inPhoto"]["tmp_name"]);
     $check1 = getimagesize($_FILES["mainPhoto"]["tmp_name"]);
@@ -190,8 +194,9 @@ function addElement(){
 }
 
 function login(){
+    $db = new DB();
     $sql = "SELECT * FROM user WHERE email = '" . $_GET["email"] . "'";
-    $row = returnFromBd($sql);
+    $row = $db->returnFromBd($sql);
     if ($row['password'] == $_GET["password"]) {
         if ($row['usertype'] == "user") {
             $_SESSION["user_id"] = new user($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
@@ -222,9 +227,10 @@ function suggestRemove(){
 }
 
 function removeItem(){
+    $db = new DB();
     $id = end(explode("=",$_GET["deleteItemName"]));
     $sql = "DELETE FROM items WHERE id = " . $id;
-    if(insertBd($sql)){
+    if($db->insertBd($sql)){
         echo "Item removed " . $id;
     }else{
         echo "Error";
@@ -234,14 +240,14 @@ function removeItem(){
 /*Delete Users*/
 
 function suggestRemoveUser(){
-    $bd = bdConect();
+    $db = new DB();
     $itemList = $_GET['removeUser'];
-    $sql = "select email,id from user where email like '$itemList%'";
-    $res = $bd->query($sql);
-    while($row = $res->fetch_assoc()){
-        echo "<option value='".$row["email"]."'>";
+    $sql = "select email,id from user where email like '$itemList%' and userType = 'user'";
+    $res = $db->returnArrayFrombd($sql);
+    foreach($res as $value){
+        echo "<option value='".$value["email"]."'>";
     }
-    $bd->close();
+    die();
 }
 
 function deleteUser(){
@@ -260,7 +266,7 @@ function register(){
 /*Return Info*/
 
 function returnInfo(){
-    $library = new Utility();
+    $db = new DB();
     $date = getdate();
     if($date["mon"] < 10){
         $month = "0".$date["mon"];
@@ -275,7 +281,11 @@ function returnInfo(){
     $year = $date["year"];
     $str = $year."-".$month."-".$day;
     $sql = "SELECT items.id,title,user.email FROM booking inner join items  INNER join user where backDay = '".$str."' and idBook = items.id and idUser = user.id";
-    $array = returnArrayFrombd($sql);
+    $array = $db->returnArrayFrombd($sql);
+    if(empty($array)){
+        echo "Nothing to return Today";
+        die();
+    }
     foreach ($array as $value){
         echo "<hr/>Item ID: ". $value["id"]."<br/>Title: ". $value["title"] ."<br/>User email: " . $value["email"];
     }
@@ -285,8 +295,9 @@ function returnInfo(){
 
 
 function editProfile(){
+    $db = new DB();
     $sql = "UPDATE user SET name=('".$_POST["name"]."'), surname=('".$_POST["surname"] ."'), dni=('".$_POST["dni"] ."'), address=('".$_POST["address"] ."') WHERE email = '". $_SESSION["user_id"]->getEmail() ."'";
-    insertBd($sql);
+    $db->insertBd($sql);
     $_SESSION["user_id"]->setName($_POST["name"]);
     $_SESSION["user_id"]->setSurname($_POST["surname"]);
     $_SESSION["user_id"]->setAddress($_POST["address"]);
