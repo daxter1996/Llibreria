@@ -1,7 +1,11 @@
 <?php
 include_once "classes/libraryUtility.php";
 $library = new Utility();
-session_start();
+if(isset($_COOKIE["PHPSESSID"]))
+{
+    session_start();
+}
+
 ?>
 <!DOCTYPE html>
 <html>

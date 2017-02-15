@@ -25,8 +25,9 @@
         <div class="row">
             <div class="col s12 m6 offset-m1">
                 <?php
+                $db = new DB();
                 $sql = "select * from booking where idBook = ". $_GET["id"];
-                $result = returnFromBd($sql);
+                $result = $db->returnFromBd($sql);
 
                 if(isset($_SESSION["user_id"])) {
                     if ($result == 0) {
@@ -71,11 +72,25 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
-    // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
     });
     $(document).ready(function(){
         $('.tooltipped').tooltip({delay: 50});
+    });
+
+
+    /** Days to be disabled as an array */
+    var disableddates = ["15-02-2017", "12-11-2014", "12-25-2014", "12-20-2014"];
+
+    function DisableSpecificDates(date) {
+        var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
+        return [disableddates.indexOf(string) == -1];
+    }
+
+    $(function() {
+        $("#date").datepicker({
+            beforeShowDay: DisableSpecificDates
+        });
     });
 </script>
 </body>

@@ -32,7 +32,7 @@ if(isset($_GET["makePeasant"])){
     echo $_SESSION["user_id"]->makePeasant($_GET["makePeasant"]);
 }
 /*Login*/
-if(isset($_GET["login"])){
+if(isset($_POST["loginUser"])){
     login();
 }
 /*Add Item)*/
@@ -165,9 +165,9 @@ function searchItem(){
 
 function login(){
     $db = new DB();
-    $sql = "SELECT * FROM user WHERE email = '" . $_GET["email"] . "'";
+    $sql = "SELECT * FROM user WHERE email = '" . $_POST["email"] . "'";
     $row = $db->returnFromBd($sql);
-    if ($row['password'] == $_GET["password"]) {
+    if ($row['password'] == $_POST["password"]) {
         if ($row['usertype'] == "user") {
             $_SESSION["user_id"] = new user($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
             echo "Login OK";

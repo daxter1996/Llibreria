@@ -1,7 +1,7 @@
 <?php
 include_once "header.php";
 if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
-    die("Page not Aviable");
+    die("Page not Aviable Please Login as an Admin");
 }
 ?>
 <body>
@@ -95,8 +95,9 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
             <div id="manageCatalog">
                 <div class="col s12">
                     <ul class="tabs blue-grey">
-                        <li class="tab col s6"><a class="active" href="#addElement">Add Elemenr</a></li>
+                        <li class="tab col s6"><a class="active" href="#addElement">Add Element</a></li>
                         <li class="tab col s6"><a href="#deleteElement">Delete Element</a></li>
+                        <li class="tab col s6"><a href="#changeSettings">Change Settings</a></li>
                     </ul>
                 </div>
 
@@ -199,6 +200,20 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                             <input type="text" list="itemList" name="removeItems" id="listSuggest" class="validate">
                                 <datalist id="itemList">
                                 </datalist>
+                            <label for="itemList">ID</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteItemBtnId" type="submit" name="deleteItemName" class="validate" value="Search">
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="changeSettings">
+                    <div class="col s12 m9 offset-l1">
+                        <h5>Settings</h5>
+                        <div class="input-field col s12">
+                            <input type="text" list="itemList" name="removeItems" id="listSuggest" class="validate">
+                            <datalist id="itemList">
+                            </datalist>
                             <label for="itemList">ID</label>
                         </div>
                         <div class="input-field col s12">

@@ -70,19 +70,28 @@ function cancelEdit() {
     /*Login*/
 
     $(document).ready(function () {
-        $("#loginBtn").click(function () {
-            $.get("scripts.php", {
-                login: true,
-                email: $("#emailIn").val(),
-                password: $("#passwdIn").val()
-            }, function (data) {
-                Materialize.toast(data, 4000);
-                if (data == "Login OK") {
-                    window.location.replace("index.php")
+        $("#login").submit(function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: "scripts.php",
+                type: "POST",
+                data: formData,
+                contentType: false,
+                cache: false,
+                processData: false,
+                success: function (data) {
+                    Materialize.toast(data, 4000);
+                    setTimeout(function () {
+                        if(data == "Login OK") window.location.replace("index.php");
+                    },2000);
+
+                }, error: function () {
+                    alert("Fallo de JS");
                 }
-            })
-        })
-    })
+            });
+        });
+    });
 
     /*Delete Items*/
     $(document).ready(function () {
