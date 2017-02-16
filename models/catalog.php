@@ -1,10 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jesus
- * Date: 16/02/2017
- * Time: 10:16
- */
+include_once "../classes/libraryUtility.php";
+$library = new Utility();
+if(isset($_COOKIE["PHPSESSID"])) {
+    session_start();
+}
 
 /*SearchItem*/
 if(isset($_GET["searchName"])){
@@ -24,8 +23,8 @@ function searchItem(){
             echo "<div class='col s12 m3'>";
             echo "<div class='card'>";
             echo "<div class='card-image'>";
-            $fileName = glob("img/item/portada_".$value->getId().".*");
-            echo "<img src='".$fileName[0]."'>";
+            $fileName = glob("../img/item/portada_".$value->getId().".*");
+            echo "<img src='" . str_replace("../", "", $fileName[0]) . "'>";
             echo "</div>";
             echo "<div class='card-content'style='min-height: 300px;'>";
             echo "<h5>" . $value->getTitle() . "</h5>";
@@ -56,8 +55,8 @@ function searchItem(){
                 echo "<div class='col s12 m3'>";
                 echo "<div class='card'>";
                 echo "<div class='card-image'>";
-                $fileName = glob("img/item/portada_" . $value->getId() . ".*");
-                echo "<img src='" . $fileName[0] . "'>";
+                $fileName = glob("../img/item/portada_" . $value->getId() . ".*");
+                echo "<img src='" . str_replace("../", "", $fileName[0]) . "'>";
                 echo "</div>";
                 echo "<div class='card-content'style='min-height: 300px;'>";
                 echo "<h5>" . $value->getTitle() . "</h5>";

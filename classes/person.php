@@ -45,27 +45,29 @@ require_once("db.php");
             return $db->insertBd($sql);
         }
 
-        function login(){
+
+        function returnBook($id){
             $db = new DB();
-            $sql = "SELECT * FROM user WHERE email = '" . $_POST["email"] . "'";
-            $row = $db->returnFromBd($sql);
-            if ($row['password'] == $_POST["password"]) {
-                if ($row['usertype'] == "user") {
-                    $_SESSION["user_id"] = new user($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-                    echo "Login OK";
-                }
-                if ($row['usertype'] == "admin") {
-                    $_SESSION["user_id"] = new admin($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-                    echo "Login OK";
-                }
-                if ($row['usertype'] == "librarian") {
-                    $_SESSION["user_id"] = new librarian($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
-                    echo "Login OK";
-                }
-            } else {
-                echo "Login Failed";
+            $sql = "DELETE FROM booking WHERE idBook = " . $id;
+            if($db->insertBd($sql)){
+                echo "Thanks!";
+                exit();
+            }else{
+                echo "Error!";
                 exit();
             }
         }
+
+        function editProfile($name,$surname,$dni,$address){
+            $db = new DB();
+            $sql = "UPDATE user SET name=('".$name."'), surname=('".$surname ."'), dni=('".$dni ."'), address=('".$address ."') WHERE email = '". $this->email ."'";
+            $db->insertBd($sql);
+            $_SESSION["user_id"]->setName($_POST["name"]);
+            $_SESSION["user_id"]->setSurname($_POST["surname"]);
+            $_SESSION["user_id"]->setAddress($_POST["address"]);
+            $_SESSION["user_id"]->setDni($_POST["dni"]);
+            header("Location: userTemplate.php");
+        }
+
     }
 ?>

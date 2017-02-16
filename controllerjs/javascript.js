@@ -7,18 +7,18 @@ function cancelEdit() {
     document.getElementById("profile").style.display = "block";
     document.getElementById("editProfile").style.display = "none";
 }
-    /*ReturnBook*/
+/*ReturnBook*/
 
-    $(document).ready(function () {
-        $("#returnBookBtn").click(function () {
-            $.get("models/scripts.php", {returnId: $("#idBook").val()}, function (data) {
-                Materialize.toast(data,4000);
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
-            })
+$(document).ready(function () {
+    $("#returnBookBtn").click(function () {
+        $.get("models/scripts.php", {returnId: $("#idBook").val()}, function (data) {
+            Materialize.toast(data,4000);
+            setTimeout(function() {
+                location.reload();
+            }, 2000);
         })
     })
+})
 
     /*DelateAcc*/
 
@@ -30,79 +30,6 @@ function cancelEdit() {
                     setTimeout(function () {
                         window.location.replace("index.php");
                     }, 1000);
-                }
-            });
-        });
-    });
-
-    /*Booking*/
-
-    $(document).ready(function () {
-        $("#bookform").submit(function (e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "models/models/scripts.php",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    Materialize.toast(data, 4000);
-                    setTimeout(function() {
-                        location.reload();
-                    }, 2000);
-                }, error: function () {
-                    alert("okey");
-                }
-            });
-        });
-    });
-
-    /*Register*/
-
-    $(document).ready(function () {
-        $("#register").submit(function (e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "models/scripts.php",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    Materialize.toast(data, 4000);
-                }, error: function () {
-                    alert("Fallo de JS");
-                }
-            });
-        });
-    });
-
-    /*Login*/
-
-    $(document).ready(function () {
-        $("#login").submit(function (e) {
-            e.preventDefault();
-            var formData = new FormData(this);
-            $.ajax({
-                url: "models/scripts.php",
-                type: "POST",
-                data: formData,
-                contentType: false,
-                cache: false,
-                processData: false,
-                success: function (data) {
-                    Materialize.toast(data, 4000);
-                    setTimeout(function () {
-                        if(data == "Login OK") window.location.replace("index.php");
-                    },2000);
-
-                }, error: function () {
-                    alert("Fallo de JS");
                 }
             });
         });
@@ -140,24 +67,6 @@ function cancelEdit() {
     $(document).ready(function () {
         $("#deleteUserBtn").click(function () {
             $.get("models/scripts.php", {deleteUser: $("#userListSuggest").val()}, function (data) {
-                Materialize.toast(data, 4000);
-            })
-        })
-    })
-
-    /*Register User*/
-
-    $(document).ready(function () {
-        $("#registerUserBtn").click(function () {
-            $.get("models/scripts.php", {
-                registerName: $("#registerNameIn").val(),
-                surname: $("#registerSurnameIn").val(),
-                password: $("#registerPasswordIn").val(),
-                address: $("#registerAddressIn").val(),
-                dni: $("#registerDniIn").val(),
-                email: $("#registerEmailIn").val(),
-                userType: $("#registerTypeIn").val()
-            }, function (data) {
                 Materialize.toast(data, 4000);
             })
         })
@@ -214,23 +123,3 @@ function cancelEdit() {
             });
         });
     });
-
-    /*Search Results*/
-
-    $(document).ready(function () {
-        $("#searchIn").keyup(function () {
-            $.get("models/scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
-                $("#searchResult").empty();
-                $("#searchResult").html(data);
-            })
-        })
-    })
-
-    $(document).ready(function () {
-        $("#search1").mouseleave(function () {
-            $.get("models/scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
-                $("#searchResult").empty();
-                $("#searchResult").html(data);
-            })
-        })
-    })
