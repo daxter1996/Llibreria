@@ -1,5 +1,4 @@
 <?php include_once "header.php"; ?>
-<?php include_once("bdconect.php");?>
 <body>
 <br/>
 <div class="containter">

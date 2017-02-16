@@ -36,5 +36,4 @@ class user extends person {
         "<br/>DNI: " . $this->dni.
         "<br/>Email: " . $this->email;
     }
-
 }

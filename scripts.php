@@ -1,6 +1,8 @@
 <?php
 require_once("classes/libraryUtility.php");
-session_start();
+if(isset($_COOKIE["PHPSESSID"])) {
+    session_start();
+}
 
 /*Delete Items*/
 if(isset($_GET["removeItems"])){
@@ -53,7 +55,15 @@ if(isset($_POST["bookId"])){
 }
 /*ReturnItem*/
 if(isset($_GET["returnId"])){
-   returnBook();
+    returnBook();
+}
+/*Delate Account*/
+if(isset($_GET["delateAcc"])){
+    if ($_SESSION["user_id"]->deleteAcc()){
+        echo true;
+        $_SESSION["user_id"]->closeSession();
+        exit();
+    }
 }
 
 function returnBook(){

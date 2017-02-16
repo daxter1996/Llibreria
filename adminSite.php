@@ -209,16 +209,37 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                 </div>
                 <div class="row" id="changeSettings">
                     <div class="col s12 m9 offset-l1">
-                        <h5>Settings</h5>
-                        <div class="input-field col s12">
-                            <input type="text" list="itemList" name="removeItems" id="listSuggest" class="validate">
-                            <datalist id="itemList">
-                            </datalist>
-                            <label for="itemList">ID</label>
-                        </div>
-                        <div class="input-field col s12">
-                            <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteItemBtnId" type="submit" name="deleteItemName" class="validate" value="Search">
-                        </div>
+                        <h4>Settings</h4>
+                        <form method="post" id="settings">
+                            <div class="row">
+                                <input type="hidden" name="settings">
+                                <div class="input-field col s12">
+                                    <input id="borrow" name="borrow" type="text" class="validate" required>
+                                    <label for="borrow">Borrow</label>
+                                </div>
+                                <h5>Protection Levels</h5>
+                                <div class="input-field col s12">
+                                    <input id="dvdprotect"  name="dvdprotect" type="text" class="validate" required>
+                                    <label for="dvdprotect">DVD</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="bookprotect" name="bookprotect" type="password" class="validate" required>
+                                    <label for="bookprotect">Book</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input id="magazineprotect" name="magazineprotect" type="text" class="validate" required>
+                                    <label for="magazineprotect">Magazine</label>
+                                </div>
+                                <h5>Penalty</h5>
+                                <div class="input-field col s12">
+                                    <input id="penalty" name="penalty" type="text" class="validate" required>
+                                    <label for="penalty">Penalty</label>
+                                </div>
+                                <div class="input-field col s12">
+                                    <input class="btn blue-grey" name="Save settings" type="submit" class="validate" required>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

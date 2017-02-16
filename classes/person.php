@@ -1,4 +1,6 @@
 <?php
+require_once("db.php");
+
     abstract class person{
         protected $id;
         protected $name;
@@ -35,6 +37,12 @@
            $this->password = $password;
            $this->dni = $dni;
            $this->email = $email;
+        }
+
+        public function deleteAcc(){
+            $db = new DB();
+            $sql = "delate from users where email = '".$this->email."'";
+            return $db->insertBd($sql);
         }
     }
 ?>

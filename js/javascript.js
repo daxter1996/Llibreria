@@ -20,6 +20,21 @@ function cancelEdit() {
         })
     })
 
+    /*DelateAcc*/
+
+    $(document).ready(function () {
+        $("#delateAccBtn").click(function () {
+            $.get("scripts.php", {delateAcc: "true"}, function (data) {
+                if(data == 1){
+                    Materialize.toast("Account Deleted",1000);
+                    setTimeout(function () {
+                        window.location.replace("index.php");
+                    }, 1000);
+                }
+            });
+        });
+    });
+
     /*Booking*/
 
     $(document).ready(function () {

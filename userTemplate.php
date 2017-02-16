@@ -28,7 +28,8 @@
             <div class="col s5 m2"><img class="circle responsive-img" src="img/noPicture.png"></div>
             <div class="col offset-m1 s8">
                 <h3>Edit information</h3>
-                <form method="post" action="datos.php">
+                <form method="post" onsubmit="false" id="">
+                    <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail()?>">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="name" name="name" type="text" value="<?php echo $_SESSION["user_id"]->getName()?>" class="validate">
@@ -48,11 +49,11 @@
                         </div>
                         <div class="input-field col s12 ">
                             <input class="aves-effect waves-light btn blue-grey darken-1" id="editProfile" type="submit" name="editProfile" class="validate" value="Edit">
-                            <input class="aves-effect waves-light btn blue-grey darken-1" id="delate" type="submit" name="deleteAcc" class="validate" value="Delate Account">
                         </div>
                     </div>
                 </form>
                 <div class="row">
+                    <button class="btn blue-grey" id="delateAccBtn">Delete Profile</button>
                     <button onclick="cancelEdit()" class="btn blue-grey">Cancel</button>
                 </div>
             </div>
