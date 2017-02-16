@@ -89,6 +89,17 @@ class admin extends person {
         echo "Register Successfull";
     }
 
+    function deleteUserAdmin($email){
+        $db = new DB();
+        $sql = "DELETE FROM user WHERE email = '" . $email . "'";
+        if($db->insertBd($sql)){
+            return "User with email " . $email . " deleted.";
+        }else{
+            return "Some error";
+        }
+
+    }
+
 }
 
 ?>

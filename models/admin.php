@@ -1,16 +1,20 @@
 <?php
-
+require_once("../classes/libraryUtility.php");
 /*Delete User*/
 if(isset($_GET["deleteUserList"])){
+    echo "<option value='pene'>";
     suggestRemoveUser();
 }
+
 if(isset($_GET["deleteUser"])){
-    deleteUser();
+    echo $_SESSION["user_id"]->deleteUserAdmin($_GET["email"]);
 }
 
+/*---------*/
 if(isset($_GET["registerName"])){
     $_SESSION["user_id"]->registerUser($_GET["registerName"],$_GET["surname"],$_GET["email"],$_GET["password"], $_GET["address"], $_GET["dni"], $_GET["userType"]);
 }
+
 /*Return Today info*/
 if(isset($_GET["returnInfo"])){
     returnInfo();
@@ -18,12 +22,12 @@ if(isset($_GET["returnInfo"])){
 
 /*RemoveItem*/
 if(isset($_GET["deleteItemName"])){
-    removeItem();
+    /*Implementar dins classe admin*/ removeItem();
 }
 
 /*Suggest Remove Item*/
 if(isset($_GET["removeItems"])){
-    suggestRemove();
+    suggestRemoveItem();
 }
 
 /*Make peasant*/
@@ -39,21 +43,17 @@ if(isset($_GET["makePeasant"])){
 /*-----------------Scritps-----------------*/
 
 /*Delete Users*/
+/*Suggest Remove users*/
 
 function suggestRemoveUser(){
     $db = new DB();
-    $itemList = $_GET['removeUser'];
-    $sql = "select email,id from user where email like '$itemList%' and userType = 'user'";
+    $itemList = $_GET['deleteUserList'];
+    $sql = "select email,id from user where email like '$itemList%'";
     $res = $db->returnArrayFrombd($sql);
     foreach($res as $value){
         echo "<option value='".$value["email"]."'>";
     }
     exit();
-}
-
-function deleteUser(){
-    $sql = "DELETE FROM user WHERE email = '" . $_GET["deleteUser"] . "'";insertBd($sql);
-    echo "User with email " . $_GET["deleteUser"] . " deleted.";
 }
 
 function returnInfo(){
@@ -83,7 +83,7 @@ function returnInfo(){
 }
 
 /*Delete Items*/
-function suggestRemove(){
+function suggestRemoveItem(){
     $library = new Utility();
     $arraySearch = $library->findBookByTitle($_GET["removeItems"]);
     foreach ($arraySearch as $row){
