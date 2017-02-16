@@ -41,7 +41,7 @@ require_once("db.php");
 
         public function deleteAcc(){
             $db = new DB();
-            $sql = "delate from users where email = '".$this->email."'";
+            $sql = "delete from user where email = '".$this->email."'";
             return $db->insertBd($sql);
         }
 

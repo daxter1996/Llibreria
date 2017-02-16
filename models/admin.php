@@ -26,6 +26,16 @@ if(isset($_GET["removeItems"])){
     suggestRemove();
 }
 
+/*Make peasant*/
+if(isset($_GET["makeAdmin"])){
+    echo $_SESSION["user_id"]->makeAdmin($_GET["makeAdmin"]);
+}
+
+/*Make admin*/
+if(isset($_GET["makePeasant"])){
+    echo $_SESSION["user_id"]->makePeasant($_GET["makePeasant"]);
+}
+
 /*-----------------Scritps-----------------*/
 
 /*Delete Users*/
