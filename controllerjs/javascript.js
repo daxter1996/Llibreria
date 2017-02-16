@@ -11,7 +11,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#returnBookBtn").click(function () {
-            $.get("scripts.php", {returnId: $("#idBook").val()}, function (data) {
+            $.get("models/scripts.php", {returnId: $("#idBook").val()}, function (data) {
                 Materialize.toast(data,4000);
                 setTimeout(function() {
                     location.reload();
@@ -42,7 +42,7 @@ function cancelEdit() {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "scripts.php",
+                url: "models/models/scripts.php",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -67,7 +67,7 @@ function cancelEdit() {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "scripts.php",
+                url: "models/scripts.php",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -89,7 +89,7 @@ function cancelEdit() {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "scripts.php",
+                url: "models/scripts.php",
                 type: "POST",
                 data: formData,
                 contentType: false,
@@ -111,7 +111,7 @@ function cancelEdit() {
     /*Delete Items*/
     $(document).ready(function () {
         $("#listSuggest").keyup(function () {
-            $.get("scripts.php", {removeItems: $("#listSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {removeItems: $("#listSuggest").val()}, function (data) {
                 $("datalist").empty();
                 $("datalist").html(data);
             })
@@ -121,7 +121,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#deleteItemBtnId").click(function () {
-            $.get("scripts.php", {deleteItemName: $("#listSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {deleteItemName: $("#listSuggest").val()}, function (data) {
                 Materialize.toast(data, 4000);
             })
         })
@@ -130,7 +130,7 @@ function cancelEdit() {
     /*Delete Users*/
     $(document).ready(function () {
         $("#userListSuggest").keyup(function () {
-            $.get("scripts.php", {deleteUserList: $("#userListSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {deleteUserList: $("#userListSuggest").val()}, function (data) {
                 $("datalist").empty();
                 $("datalist").html(data);
             })
@@ -139,7 +139,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#deleteUserBtn").click(function () {
-            $.get("scripts.php", {deleteUser: $("#userListSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {deleteUser: $("#userListSuggest").val()}, function (data) {
                 Materialize.toast(data, 4000);
             })
         })
@@ -149,7 +149,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#registerUserBtn").click(function () {
-            $.get("scripts.php", {
+            $.get("models/scripts.php", {
                 registerName: $("#registerNameIn").val(),
                 surname: $("#registerSurnameIn").val(),
                 password: $("#registerPasswordIn").val(),
@@ -167,7 +167,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#returnTodayBtn").click(function () {
-            $.get("scripts.php", {returnInfo: true}, function (data) {
+            $.get("models/scripts.php", {returnInfo: true}, function (data) {
                 $("#returnList").empty();
                 $("#returnList").html(data);
             })
@@ -178,7 +178,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#makeAdminBtn").click(function () {
-            $.get("scripts.php", {makeAdmin: $("#userListSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {makeAdmin: $("#userListSuggest").val()}, function (data) {
                 Materialize.toast(data, 4000);
             })
         })
@@ -186,7 +186,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#makePeasantBtn").click(function () {
-            $.get("scripts.php", {makePeasant: $("#userListSuggest").val()}, function (data) {
+            $.get("models/scripts.php", {makePeasant: $("#userListSuggest").val()}, function (data) {
                 Materialize.toast(data, 4000);
             })
         })
@@ -199,7 +199,7 @@ function cancelEdit() {
             e.preventDefault();
             var formData = new FormData(this);
             $.ajax({
-                url: "scripts.php",
+                url: "models/scripts.php",
                 type: "POST",
                 data: formData,
                 mimeTypes: "multipart/form-data",
@@ -219,7 +219,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#searchIn").keyup(function () {
-            $.get("scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
+            $.get("models/scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
                 $("#searchResult").empty();
                 $("#searchResult").html(data);
             })
@@ -228,7 +228,7 @@ function cancelEdit() {
 
     $(document).ready(function () {
         $("#search1").mouseleave(function () {
-            $.get("scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
+            $.get("models/scripts.php", {searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
                 $("#searchResult").empty();
                 $("#searchResult").html(data);
             })

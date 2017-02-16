@@ -44,5 +44,28 @@ require_once("db.php");
             $sql = "delate from users where email = '".$this->email."'";
             return $db->insertBd($sql);
         }
+
+        function login(){
+            $db = new DB();
+            $sql = "SELECT * FROM user WHERE email = '" . $_POST["email"] . "'";
+            $row = $db->returnFromBd($sql);
+            if ($row['password'] == $_POST["password"]) {
+                if ($row['usertype'] == "user") {
+                    $_SESSION["user_id"] = new user($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
+                    echo "Login OK";
+                }
+                if ($row['usertype'] == "admin") {
+                    $_SESSION["user_id"] = new admin($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
+                    echo "Login OK";
+                }
+                if ($row['usertype'] == "librarian") {
+                    $_SESSION["user_id"] = new librarian($row["id"], $row["name"], $row["surname"], "", $row["address"], $row["password"], $row["dni"], $row["email"]);
+                    echo "Login OK";
+                }
+            } else {
+                echo "Login Failed";
+                exit();
+            }
+        }
     }
 ?>

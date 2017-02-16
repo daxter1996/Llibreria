@@ -83,6 +83,11 @@ class admin extends person {
             return $e;
         }
     }
+    function registerUser($registerName,$surname,$email,$password,$address,$dni,$usertype){
+        $query = "INSERT INTO user VALUES ('','" . $registerName . "','" . $surname . "','" . $email . "','" . $password . "','" . $address . "','" . $dni . "','".$usertype ."')";
+        insertBd($query);
+        echo "Register Successfull";
+    }
 
 }
 
