@@ -5,6 +5,14 @@
     <div class="row ">
         <div class="offset-m1 m10 offset-s0 col z-depth-2" id="profile">
             <br/>
+            <?php
+            $phoroSrc = "img/noImage.png";
+            $db = new DB();
+            $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '".$_SESSION["user_id"]->getEmail()."'");
+            $fileName = glob("img/profile/profile".$return["id"].".*");
+            echo "<img src='".$fileName[0]."'>";
+
+            ?>
             <div class="col s5 m2"><img class="circle responsive-img" src="img/noPicture.png"></div>
             <div class="col offset-m1">
                 <h3>User information</h3>
@@ -28,11 +36,12 @@
             <div class="col s5 m2"><img class="circle responsive-img" src="img/noPicture.png"></div>
             <div class="col offset-m1 s8">
                 <h3>Edit information</h3>
-                <form method="post" onsubmit="false" id="">
+                <form method="post" onsubmit="return false" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail()?>">
+                    <input type="hidden" name="action" value="editProfile">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="name" name="name" type="text" value="<?php echo $_SESSION["user_id"]->getName()?>" class="validate">
+                            <input id="name" name="name" type="text"" value="<?php echo $_SESSION["user_id"]->getName()?>" class="validate">
                             <label for="name">Name</label>
                         </div>
                         <div class="input-field col s12 ">
@@ -46,6 +55,15 @@
                         <div class="input-field col s12 ">
                             <input id="dni" name="dni" type="text" value="<?php echo $_SESSION["user_id"]->getDni()?>" class="validate">
                             <label for="dni">DNI</label>
+                        </div>
+                        <div class="file-field input-field col s12">
+                            <div class="btn waves-light btn blue-grey darken-1">
+                                <span>Profile Image</span>
+                                <input type="file" name="profilePhoto">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text" placeholder="Main Photo">
+                            </div>
                         </div>
                         <div class="input-field col s12 ">
                             <input class="aves-effect waves-light btn blue-grey darken-1" id="editProfile" type="submit" name="editProfile" class="validate" value="Edit">

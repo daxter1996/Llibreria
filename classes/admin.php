@@ -12,7 +12,6 @@ class admin extends person {
 
     public function addElement($title,$author,$subject,$company,$year,$editionNumber,$state,$description,$isbn,$type){
         $db = new DB();
-        //$sql = "Insert into items VALUES ('','")";
         $sql = "Insert into items VALUES ('','".$title."','".$author."','".$subject."','".$company."','".$year."','".$editionNumber."','".$state."','".$description."','5','".$isbn."','".$type."')";
         $db->insertBd($sql);
         $return = $db->returnFromBd("SELECT * FROM items ORDER BY id DESC LIMIT 1");

@@ -15,3 +15,31 @@ $(document).ready(function () {
     });
 });
 
+/*Edit Acc*/
+
+$(document).ready(function () {
+    $("#editProfileForm").submit(function (e) {
+        e.preventDefault();
+        Materialize.toast("asdf",1234)
+        var formData = new FormData(this);
+        $.ajax({
+            url: "models/profile.php",
+            type: "POST",
+            data: formData,
+            mimeTypes: "multipart/form-data",
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                Materialize.toast(data, 2000);
+                if(data == "Edit Ok") {
+                    setTimeout(function () {
+                        window.location.reload("userTemplate.php");
+                    }, 1000);
+                }
+            }, error: function () {
+                alert("okey");
+            }
+        });
+    });
+});

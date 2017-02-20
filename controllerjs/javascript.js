@@ -20,7 +20,3 @@
             })
         })
     })
-
-
-    /*
-     select email,id from user where email like 'd' and userType = 'user'*/

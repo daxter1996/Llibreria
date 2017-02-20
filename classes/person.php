@@ -58,16 +58,24 @@ require_once("db.php");
             }
         }
 
-        function editProfile($name,$surname,$dni,$address){
+        function editProfile($name,$surname,$dni,$address,$photo){
             $db = new DB();
-            $sql = "UPDATE user SET name=('".$name."'), surname=('".$surname ."'), dni=('".$dni ."'), address=('".$address ."') WHERE email = '". $this->email ."'";
-            $db->insertBd($sql);
-            $_SESSION["user_id"]->setName($_POST["name"]);
-            $_SESSION["user_id"]->setSurname($_POST["surname"]);
-            $_SESSION["user_id"]->setAddress($_POST["address"]);
-            $_SESSION["user_id"]->setDni($_POST["dni"]);
-            header("Location: userTemplate.php");
+            $sql = "UPDATE user SET name =('".$name."'), surname =('".$surname ."'), dni =('".$dni ."'), address =('".$address ."') WHERE email = '". $this->email ."'";
+            if($name != $this->name || $surname != $this->surname || $dni != $this->dni || $address != $this->address){
+                if ($db->insertBd($sql)){
+                    $_SESSION["user_id"]->setName($_POST["name"]);
+                    $_SESSION["user_id"]->setSurname($_POST["surname"]);
+                    $_SESSION["user_id"]->setAddress($_POST["address"]);
+                    $_SESSION["user_id"]->setDni($_POST["dni"]);
+                    return "Edit Ok";
+                }else{
+                    return "Some error";
+                }
+            }else{
+                return "No changes detected";
+            }
         }
 
     }
+
 ?>
