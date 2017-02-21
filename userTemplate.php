@@ -1,4 +1,9 @@
-<?php include_once "header.php"; ?>
+<?php
+    /*if(!isset($_SESSION["user_id"])){
+        die("Page not Aviable Please Login");
+    }*/
+    include_once "header.php";
+?>
 <body>
 <br/>
 <div class="containter" style="min-height: 700px;">
@@ -9,11 +14,13 @@
             $phoroSrc = "img/noImage.png";
             $db = new DB();
             $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '".$_SESSION["user_id"]->getEmail()."'");
-            $fileName = glob("img/profile/profile".$return["id"].".*");
-            echo "<img src='".$fileName[0]."'>";
-
+            $fileName = glob("img/profile/profile_".$return["id"].".*");
+            if (isset($fileName[0])){
+                echo "<div class='col s12 m4'><img class='circle responsive-img' src='".$fileName[0]."'></div>";
+            }else {
+                echo "<div class='col s12 m4'><img class='circle responsive-img' src='img/noPicture.png'></div>";
+            }
             ?>
-            <div class="col s5 m2"><img class="circle responsive-img" src="img/noPicture.png"></div>
             <div class="col offset-m1">
                 <h3>User information</h3>
                 <strong>Name: </strong> <?php echo $_SESSION["user_id"]->getName() . " " .  $_SESSION["user_id"]->getSurname(); ?><br/>
@@ -33,8 +40,7 @@
 
         <div class="offset-m1 m10 offset-s0 col z-depth-2" style="display: none" id="editProfile">
             <br/>
-            <div class="col s5 m2"><img class="circle responsive-img" src="img/noPicture.png"></div>
-            <div class="col offset-m1 s8">
+            <div class="col offset-m1 s9">
                 <h3>Edit information</h3>
                 <form method="post" onsubmit="return false" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail()?>">
@@ -71,7 +77,7 @@
                     </div>
                 </form>
                 <div class="row">
-                    <button class="btn blue-grey" id="delateAccBtn">Delete Profile</button>
+                    <a class="waves-effect waves-light btn blue-grey" href="#modal1">Delete Account</a>
                     <button onclick="cancelEdit()" class="btn blue-grey">Cancel</button>
                 </div>
             </div>
@@ -80,12 +86,35 @@
                 </div>
             </div>
         </div>
+
+
+        <div id="modal1" class="modal">
+            <div class="modal-content">
+                <h4>Confirm email to delete this account</h4>
+                <p>
+                    <form>
+                        <input id="dni" name="dni" type="text" placeholder="Email" class="validate">
+                    </form>
+
+                </p>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat green lighten-2">Agree</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat red lighten-2">Cancel</a>
+            </div>
+        </div>
     </div>
 </div>
 <!--Import jQuery before materialize.js-->
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="controllerjs/profile.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
+        $('.modal').modal();
+    });
+</script>
 </body>
 <?php include_once "footer.php"; ?>
 </html>

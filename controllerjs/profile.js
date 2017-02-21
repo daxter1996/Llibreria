@@ -20,7 +20,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#editProfileForm").submit(function (e) {
         e.preventDefault();
-        Materialize.toast("asdf",1234)
         var formData = new FormData(this);
         $.ajax({
             url: "models/profile.php",

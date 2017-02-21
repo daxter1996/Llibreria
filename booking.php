@@ -1,6 +1,8 @@
-
-    <?php include_once "header.php"; ?>
     <?php
+    if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
+        die("Page not Aviable Please Login");
+    }
+    include_once "header.php";
     $llibre = $library->getBookById($_GET["id"])
     ?>
 <body>

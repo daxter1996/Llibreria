@@ -58,7 +58,7 @@ require_once("db.php");
             }
         }
 
-        function editProfile($name,$surname,$dni,$address,$photo){
+        function editProfile($name,$surname,$dni,$address){
             $db = new DB();
             $sql = "UPDATE user SET name =('".$name."'), surname =('".$surname ."'), dni =('".$dni ."'), address =('".$address ."') WHERE email = '". $this->email ."'";
             if($name != $this->name || $surname != $this->surname || $dni != $this->dni || $address != $this->address){
