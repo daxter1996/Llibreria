@@ -13,6 +13,7 @@ if(isset($_POST)){
     echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"],$_POST["surname"],$_POST["dni"],$_POST["address"]);
     if (empty($_FILES)){
         echo uploadPhoto();
+
     }
 }
 
