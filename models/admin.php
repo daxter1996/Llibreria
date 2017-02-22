@@ -22,6 +22,7 @@ if(isset($_GET["registerName"])){
     $_SESSION["user_id"]->registerUser($_GET["registerName"],$_GET["surname"],$_GET["email"],$_GET["password"], $_GET["address"], $_GET["dni"], $_GET["userType"]);
 }
 
+
 /*Return Today info*/
 if(isset($_GET["returnInfo"])){
     returnInfo();
