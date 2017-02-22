@@ -8,5 +8,4 @@ include_once("magazine.php");
 include_once("user.php");
 */
 include_once("libraryUtility.php");
-
 ?>

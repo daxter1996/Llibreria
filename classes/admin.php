@@ -88,7 +88,7 @@ class admin extends person {
         echo "Register Successfull";
     }
 
-    function deleteUserAdmin($email){
+    function deleteUser($email){
         $db = new DB();
         $sql = "DELETE FROM user WHERE email = '" . $email . "'";
         if($db->insertBd($sql)){
@@ -96,7 +96,26 @@ class admin extends person {
         }else{
             return "Some error";
         }
+    }
 
+    function removeItem($id1){
+        $id = end(explode("=",$id1));
+        $db = new DB();
+        $sql = "INSERT INTO deleteditems SELECT * FROM items WHERE id = ". $id;
+        $sql2 = "DELETE FROM items WHERE id = " . $id;
+        if($db->insertBd($sql) && $db->insertBd($sql2)){
+            $route = "../img/item/";
+            $glob = glob($route."*_".$id.".*");
+            if(!empty($glob)){
+                foreach ($glob as $value){
+                    $ex = explode("/",$value);
+                    rename($value, $route."/deleted/".end($ex));
+                }
+            }
+            return "Item removed " . $id;
+        }else{
+            return"Error, Item not Found";
+        }
     }
 
 }

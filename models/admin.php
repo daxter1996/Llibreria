@@ -1,15 +1,22 @@
 <?php
 require_once("../classes/libraryUtility.php");
+session_start();
+/*Dinamic call*/
+
+if(isset($_GET["action"])){
+    echo $_SESSION["user_id"]->$_GET["action"]($_GET["info"]);
+}
+
 /*Delete User*/
 if(isset($_GET["deleteUserList"])){
     echo "<option value='pene'>";
     suggestRemoveUser();
 }
-
+/*
 if(isset($_GET["deleteUser"])){
-    echo $_SESSION["user_id"]->deleteUserAdmin($_GET["email"]);
+    echo $_SESSION["user_id"]->deleteUser($_GET["email"]);
 }
-
+*/
 /*---------*/
 if(isset($_GET["registerName"])){
     $_SESSION["user_id"]->registerUser($_GET["registerName"],$_GET["surname"],$_GET["email"],$_GET["password"], $_GET["address"], $_GET["dni"], $_GET["userType"]);
@@ -18,11 +25,6 @@ if(isset($_GET["registerName"])){
 /*Return Today info*/
 if(isset($_GET["returnInfo"])){
     returnInfo();
-}
-
-/*RemoveItem*/
-if(isset($_GET["deleteItemName"])){
-    /*Implementar dins classe admin*/ removeItem();
 }
 
 /*Suggest Remove Item*/
@@ -90,15 +92,4 @@ function suggestRemoveItem(){
         echo "<option value='".$row->getTitle()." id=".$row->getId()."'>";
     }
     exit();
-}
-
-function removeItem(){
-    $db = new DB();
-    $id = end(explode("=",$_GET["deleteItemName"]));
-    $sql = "DELETE FROM items WHERE id = " . $id;
-    if($db->insertBd($sql)){
-        echo "Item removed " . $id;
-    }else{
-        echo "Error";
-    }
 }

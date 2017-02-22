@@ -7,7 +7,6 @@
 /*Suggest Delete Items*/
 $(document).ready(function () {
     $("#listSuggest").keyup(function () {
-        Materialize.toast("suggest", 3463)
         $.get("models/admin.php", {removeItems: $("#listSuggest").val()}, function (data) {
             $("datalist").empty();
             $("datalist").html(data);
@@ -18,13 +17,13 @@ $(document).ready(function () {
 /*Delete Item*/
 $(document).ready(function () {
     $("#deleteItemBtnId").click(function () {
-        $.get("models/admin.php", {deleteItemName: $("#listSuggest").val()}, function (data) {
+        $.get("models/admin.php", {info: $("#listSuggest").val(), action: "removeItem"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
 })
 
-/*Delete Users*/
+/*Delete Users Suggest*/
 $(document).ready(function () {
     $("#userListSuggest").keyup(function () {
         $.get("models/admin.php", {deleteUserList: $("#userListSuggest").val()}, function (data) {
@@ -33,10 +32,10 @@ $(document).ready(function () {
         })
     })
 })
-
+/*Delete User*/
 $(document).ready(function () {
     $("#deleteUserBtn").click(function () {
-        $.get("models/admin.php", {deleteUser: $("#userListSuggest").val()}, function (data) {
+        $.get("models/admin.php", {info: $("#userListSuggest").val(), action: "deleteUser"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
