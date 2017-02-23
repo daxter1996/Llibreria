@@ -1,8 +1,8 @@
 <?php
-    /*if(!isset($_SESSION["user_id"])){
-        die("Page not Aviable Please Login");
-    }*/
-    include_once "header.php";
+/*if(!isset($_SESSION["user_id"])){
+    die("Page not Aviable Please Login");
+}*/
+include_once "header.php";
 ?>
 <body>
 <br/>
@@ -13,21 +13,22 @@
             <?php
             $phoroSrc = "img/noImage.png";
             $db = new DB();
-            $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '".$_SESSION["user_id"]->getEmail()."'");
-            $fileName = glob("img/profile/profile_".$return["id"].".*");
-            if (isset($fileName[0])){
-                echo "<div class='col s12 m4'><img class='circle responsive-img' src='".$fileName[0]."'></div>";
-            }else {
+            $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '" . $_SESSION["user_id"]->getEmail() . "'");
+            $fileName = glob("img/profile/profile_" . $return["id"] . ".*");
+            if (isset($fileName[0])) {
+                echo "<div class='col s12 m4'><img class='circle responsive-img' src='" . $fileName[0] . "'></div>";
+            } else {
                 echo "<div class='col s12 m4'><img class='circle responsive-img' src='img/noPicture.png'></div>";
             }
             ?>
             <div class="col offset-m1">
                 <h3>User information</h3>
-                <strong>Name: </strong> <?php echo $_SESSION["user_id"]->getName() . " " .  $_SESSION["user_id"]->getSurname(); ?><br/>
-                <strong>Email: </strong> <?php echo $_SESSION["user_id"]->getEmail();?><br/>
+                <strong>Name: </strong> <?php echo $_SESSION["user_id"]->getName() . " " . $_SESSION["user_id"]->getSurname(); ?>
+                <br/>
+                <strong>Email: </strong> <?php echo $_SESSION["user_id"]->getEmail(); ?><br/>
                 <strong>User Type: </strong> <?php echo get_class($_SESSION["user_id"]) ?><br/>
-                <strong>Address: </strong> <?php echo $_SESSION["user_id"]->getAddress();?><br/>
-                <strong>DNI: </strong> <?php echo $_SESSION["user_id"]->getDni();?>
+                <strong>Address: </strong> <?php echo $_SESSION["user_id"]->getAddress(); ?><br/>
+                <strong>DNI: </strong> <?php echo $_SESSION["user_id"]->getDni(); ?>
                 <br/>
                 <br/>
                 <button onclick="editProfile()" class="btn blue-grey">Edit Profile</button>
@@ -43,23 +44,27 @@
             <div class="col offset-m1 s9">
                 <h3>Edit information</h3>
                 <form method="post" onsubmit="return false" id="editProfileForm" enctype="multipart/form-data">
-                    <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail()?>">
+                    <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail() ?>">
                     <input type="hidden" name="action" value="editProfile">
                     <div class="row">
                         <div class="input-field col s12">
-                            <input id="name" name="name" type="text"" value="<?php echo $_SESSION["user_id"]->getName()?>" class="validate">
+                            <input id="name" name="name" type="text""
+                            value="<?php echo $_SESSION["user_id"]->getName() ?>" class="validate">
                             <label for="name">Name</label>
                         </div>
                         <div class="input-field col s12 ">
-                            <input id="surname" name="surname" type="text" value="<?php echo $_SESSION["user_id"]->getSurname()?>" class="validate">
+                            <input id="surname" name="surname" type="text"
+                                   value="<?php echo $_SESSION["user_id"]->getSurname() ?>" class="validate">
                             <label for="surname">Surname</label>
                         </div>
                         <div class="input-field col s12 ">
-                            <input id="address" name="address" type="text" value="<?php echo $_SESSION["user_id"]->getAddress()?>" class="validate">
+                            <input id="address" name="address" type="text"
+                                   value="<?php echo $_SESSION["user_id"]->getAddress() ?>" class="validate">
                             <label for="address">Address</label>
                         </div>
                         <div class="input-field col s12 ">
-                            <input id="dni" name="dni" type="text" value="<?php echo $_SESSION["user_id"]->getDni()?>" class="validate">
+                            <input id="dni" name="dni" type="text" value="<?php echo $_SESSION["user_id"]->getDni() ?>"
+                                   class="validate">
                             <label for="dni">DNI</label>
                         </div>
                         <div class="file-field input-field col s12">
@@ -72,7 +77,8 @@
                             </div>
                         </div>
                         <div class="input-field col s12 ">
-                            <input class="aves-effect waves-light btn blue-grey darken-1" id="editProfile" type="submit" name="editProfile" class="validate" value="Edit">
+                            <input class="aves-effect waves-light btn blue-grey darken-1" id="editProfile" type="submit"
+                                   name="editProfile" class="validate" value="Edit">
                         </div>
                     </div>
                 </form>
@@ -92,15 +98,17 @@
             <div class="modal-content">
                 <h4>Confirm email to delete this account</h4>
                 <p>
-                    <form>
-                        <input id="dni" name="dni" type="text" placeholder="Email" class="validate">
-                    </form>
+                <form>
+                    <input id="dni" name="dni" type="text" placeholder="Email" class="validate">
+                </form>
 
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat green lighten-2">Agree</a>
-                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat red lighten-2">Cancel</a>
+                <a href="#!"
+                   class=" modal-action modal-close waves-effect waves-green btn-flat green lighten-2">Agree</a>
+                <a href="#!"
+                   class=" modal-action modal-close waves-effect waves-green btn-flat red lighten-2">Cancel</a>
             </div>
         </div>
     </div>
@@ -110,7 +118,7 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="controllerjs/profile.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });

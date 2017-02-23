@@ -1,47 +1,47 @@
-    <?php include_once "header.php"; ?>
-    <?php
-        $llibre = $library->getBookById($_GET["id"])
-    ?>
+<?php include_once "header.php"; ?>
+<?php
+$llibre = $library->getBookById($_GET["id"])
+?>
 <body>
 <br/>
 <div class="containter">
-        <div class="row">
-            <div class="col s12 offset-m1 m4">
-                <?php
-                    $fileName = glob("img/item/content_".$llibre->getId().".*");
-                    echo "<img class='col s12' src='".$fileName[0]."'>";
-                ?>
-            </div>
-            <div class="col s12 m6">
-                <h2><?php echo $llibre->getTitle(); ?></h2>
-                <p><strong>Author: </strong><?php echo $llibre->getAuthor(); ?></p>
-                <p><strong>Subject: </strong><?php echo $llibre->getSubject(); ?></p>
-                <p><strong>Company: </strong><?php echo $llibre->getCompany(); ?></p>
-                <p><strong>Year: </strong><?php echo $llibre->GetYear(); ?></p>
-                <p><strong>State: </strong><?php echo $llibre->getState(); ?></p>
-                <p><strong>Description:<br/><br/></strong><?php echo $llibre->getDescription(); ?></p>
-            </div>
+    <div class="row">
+        <div class="col s12 offset-m1 m4">
+            <?php
+            $fileName = glob("img/item/content_" . $llibre->getId() . ".*");
+            echo "<img class='col s12' src='" . $fileName[0] . "'>";
+            ?>
         </div>
-        <div class="row">
-            <div class="col s12 m6 offset-m1">
-                <input type="hidden" value="<?php echo $_GET["id"] ?>" id="idBook">
-                <?php
-                $db = new DB();
-                $sql = "select * from booking where idBook = ". $_GET["id"];
-                $result = $db->returnFromBd($sql);
+        <div class="col s12 m6">
+            <h2><?php echo $llibre->getTitle(); ?></h2>
+            <p><strong>Author: </strong><?php echo $llibre->getAuthor(); ?></p>
+            <p><strong>Subject: </strong><?php echo $llibre->getSubject(); ?></p>
+            <p><strong>Company: </strong><?php echo $llibre->getCompany(); ?></p>
+            <p><strong>Year: </strong><?php echo $llibre->GetYear(); ?></p>
+            <p><strong>State: </strong><?php echo $llibre->getState(); ?></p>
+            <p><strong>Description:<br/><br/></strong><?php echo $llibre->getDescription(); ?></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s12 m6 offset-m1">
+            <input type="hidden" value="<?php echo $_GET["id"] ?>" id="idBook">
+            <?php
+            $db = new DB();
+            $sql = "select * from booking where idBook = " . $_GET["id"];
+            $result = $db->returnFromBd($sql);
 
-                if(isset($_SESSION["user_id"])) {
-                    echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
-                    if ($_SESSION["user_id"]->getId() == $result["idUser"]){
-                        echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
-                    }
-                }else{
-                    echo "<a disabled href='#booking' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>bookmark</i>Booking</a>";
-                    echo "<a href='login.php' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>check</i>Login</a>";
+            if (isset($_SESSION["user_id"])) {
+                echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
+                if ($_SESSION["user_id"]->getId() == $result["idUser"]) {
+                    echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
                 }
-                ?>
-            </div>
+            } else {
+                echo "<a disabled href='#booking' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>bookmark</i>Booking</a>";
+                echo "<a href='login.php' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>check</i>Login</a>";
+            }
+            ?>
         </div>
+    </div>
 </div>
 
 <!-- Modal Structure -->
@@ -54,7 +54,7 @@
                 <?php
                 $db = new DB();
                 $sql = "Select * from booking where idBook = " . $_GET["id"];
-                foreach($db->returnArrayFrombd($sql) as $value){
+                foreach ($db->returnArrayFrombd($sql) as $value) {
                     echo "From " . $value["outDay"] . " to " . $value["backDay"];
                     echo "<hr/>";
                 }
@@ -80,19 +80,19 @@
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="controllerjs/catalog.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.modal').modal();
     });
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('.tooltipped').tooltip({delay: 50});
     });
     $(document).ready(function () {
         $("#showDays").click(function () {
             var stateDisplay = document.getElementById("itemBookedDays").style.display;
-            if(stateDisplay == "none"){
+            if (stateDisplay == "none") {
                 document.getElementById("itemBookedDays").style.display = "block";
                 document.getElementById("showDays").innerHTML = "Ocult Days";
-            }else {
+            } else {
                 document.getElementById("itemBookedDays").style.display = "none";
                 document.getElementById("showDays").innerHTML = "Show days";
             }
@@ -106,12 +106,12 @@
         return [disableddates.indexOf(string) == -1];
     }
 
-    $(function() {
+    $(function () {
         $("#date").datepicker({
             beforeShowDay: DisableSpecificDates
         });
     });
 </script>
 </body>
-    <?php include_once "footer.php"; ?>
-    </html>
+<?php include_once "footer.php"; ?>
+</html>

@@ -44,21 +44,3 @@ $(document).ready(function () {
         });
     });
 });
-
-/*Register User Admin Zone*/
-
-$(document).ready(function () {
-    $("#registerUserBtn").click(function () {
-        $.get("models/scripts.php", {
-            registerName: $("#registerNameIn").val(),
-            surname: $("#registerSurnameIn").val(),
-            password: $("#registerPasswordIn").val(),
-            address: $("#registerAddressIn").val(),
-            dni: $("#registerDniIn").val(),
-            email: $("#registerEmailIn").val(),
-            userType: $("#registerTypeIn").val()
-        }, function (data) {
-            Materialize.toast(data, 4000);
-        })
-    })
-})

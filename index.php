@@ -1,12 +1,13 @@
-<?php include_once "header.php";?>
+<?php include_once "header.php"; ?>
 <body>
 <br/>
 <div class="containter">
     <div class="row">
         <div class="col s12 m10 offset-m1 center">
-            <h2>Welcome to your Library <i class="material-icons medium">book</i></h2>
+            <img src="img/logo.png" style="height: 100px;" class="responsive-img">
+            <h2>Welcome to your Library</h2>
+            <hr/>
         </div>
-
     </div>
     <div class="row">
         <div class="col s12 m6 offset-m1">
@@ -15,18 +16,19 @@
     </div>
     <div class="row">
         <div class="col s12 m10 offset-m1">
-        <!-- Plantila vista general de un libre-->
+
+            <!-- Plantila vista general de un libre-->
             <?php
             foreach ($library->getContent() as $value) {
                 echo "<div class='col s12 m3'>";
                 echo "<div class='card'>";
                 echo "<div class='card-image'>";
-                $fileName = glob("img/item/portada_".$value->getId().".*");
-                echo "<img src='".$fileName[0]."'>";
+                $fileName = glob("img/item/portada_" . $value->getId() . ".*");
+                echo "<img src='" . $fileName[0] . "'>";
                 echo "</div>";
                 echo "<div class='card-content'style='min-height: 300px;'>";
                 echo "<h5>" . $value->getTitle() . "</h5>";
-                echo "<p><strong>Type: </strong>" . get_class($value)  . "</p>";
+                echo "<p><strong>Type: </strong>" . get_class($value) . "</p>";
                 echo "<p><strong>Author: </strong>" . $value->getAuthor() . "</p>";
                 echo "<p><strong>Subject: </strong>" . $value->getSubject() . "</p>";
                 echo "<p><strong>Company: </strong>" . $value->getCompany() . "</p>";
@@ -41,7 +43,7 @@
             }
             ?>
         </div>
-        </div>
+    </div>
 </div>
 
 <!--Import jQuery before materialize.js-->

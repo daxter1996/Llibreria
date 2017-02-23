@@ -11,12 +11,12 @@
                     <li><a class="grey-text text-lighten-3" href="catalog.php">Catalog</a></li>
                     <li><a class="grey-text text-lighten-3" href="index.php">Home</a></li>
                     <?php
-                    if(isset($_SESSION["user_id"]) &&  $_SESSION["user_id"] instanceof admin) {
+                    if (isset($_SESSION["user_id"]) && $_SESSION["user_id"] instanceof admin) {
                         echo "<li><a class='grey-text text-lighten-3' href='adminSite.php'>Admin Site</a></li>";
                     }
-                    if(isset($_SESSION["user_id"])) {
+                    if (isset($_SESSION["user_id"])) {
                         echo "<li><a class='grey-text text-lighten-3' href='close.php'>Close session</a></li>";
-                    }else{
+                    } else {
                         echo "<li><a class='grey-text text-lighten-3' href='login.php'>Login</a></li>";
                         echo "<li><a class='grey-text text-lighten-3' href='register.php'>Register</a></li>";
 

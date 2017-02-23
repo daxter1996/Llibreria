@@ -1,17 +1,18 @@
 <?php
 include_once "../classes/libraryUtility.php";
 $library = new Utility();
-if(isset($_COOKIE["PHPSESSID"])) {
+if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
 }
 
-if (isset($_POST)){
+if (isset($_POST)) {
     echo $_POST["action"]();
-}else{
+} else {
     echo "No action found";
 }
 
-function login(){
+function login()
+{
     $db = new DB();
     $sql = "SELECT * FROM user WHERE email = '" . $_POST["email"] . "'";
     $row = $db->returnFromBd($sql);
@@ -34,12 +35,13 @@ function login(){
     }
 }
 
-function register(){
+function register()
+{
     $db = new DB();
-    $sql = "INSERT INTO user VALUES ('','". $_POST["name"] ."','". $_POST["surname"] ."','". $_POST["email"] ."','". $_POST["password"] ."','". $_POST["address"] ."','". $_POST["dni"] ."','user')";
-    if($db->insertBd($sql)){
+    $sql = "INSERT INTO user VALUES ('','" . $_POST["name"] . "','" . $_POST["surname"] . "','" . $_POST["email"] . "','" . $_POST["password"] . "','" . $_POST["address"] . "','" . $_POST["dni"] . "','user')";
+    if ($db->insertBd($sql)) {
         return "Register OK!";
-    }else{
+    } else {
         return "Email is already registered";
     }
 }

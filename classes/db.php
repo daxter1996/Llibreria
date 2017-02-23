@@ -1,17 +1,20 @@
 <?php
 
-class DB{
+class DB
+{
 
-    function insertBd($insert){
+    function insertBd($insert)
+    {
         $bd = $this->bdConect();
-        if(!$bd->query($insert)){
+        if (!$bd->query($insert)) {
             return false;
         }
         $bd->close();
         return true;
     }
 
-    function bdConect(){
+    function bdConect()
+    {
         $servername = "localhost";
         $username = "root";
         $password = "";
@@ -23,7 +26,8 @@ class DB{
         return $conn;
     }
 
-    function returnArrayFrombd($sql){
+    function returnArrayFrombd($sql)
+    {
         $array = array();
         $bd = $this->bdConect();
         $result = $bd->query($sql);
@@ -31,14 +35,15 @@ class DB{
             echo "No hi ha resultats";
         } else {
             while ($row = $result->fetch_assoc()) {
-                array_push($array,$row);
+                array_push($array, $row);
             }
         }
         $bd->close();
         return $array;
     }
 
-    function returnFromBd($sql){
+    function returnFromBd($sql)
+    {
         $bd = $this->bdConect();
         $result = $bd->query($sql);
         if ($result === false) {

@@ -9,23 +9,6 @@ class user extends person {
         parent::__construct($id,$name,$surname,$idCard,$address,$password,$dni,$email);
     }
 
-
-    public function modifyUser(){
-
-    }
-
-    public function reserveBook(){
-
-    }
-
-    public function returnBook(){
-
-    }
-
-    public function delateAccount(){
-
-    }
-
     public function __toString(){
         return "ID: " . $this->id .
         "<br/>Name: " . $this->name.

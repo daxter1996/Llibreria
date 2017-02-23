@@ -1,6 +1,6 @@
 <?php
 include_once "header.php";
-if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
+if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
     die("Page not Aviable");
 }
 ?>
@@ -35,7 +35,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                     <h5>Register User</h5>
                     <div class="row">
                         <div class="input-field col s12 m6">
-                            <input  name="registerName" id="registerNameIn" type="text" class="validate" required>
+                            <input name="registerName" id="registerNameIn" type="text" class="validate" required>
                             <label for="registerNameIn">Name</label>
                         </div>
                         <div class="input-field col s12 m6">
@@ -67,7 +67,8 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                             <label>Materialize Select</label>
                         </div>
                         <div class="input-field col s12 m6">
-                            <input class="btn blue-grey" id="registerUserBtn" type="submit" class="validate" value="Register" required>
+                            <input class="btn blue-grey" id="registerUserBtn" type="submit" class="validate"
+                                   value="Register" required>
                         </div>
                     </div>
                 </div>
@@ -83,9 +84,12 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                         <label for="userList">ID</label>
                     </div>
                     <div class="input-field col s12">
-                        <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteUserBtn" type="submit" name="deleteUser" class="validate" value="Delete">
-                        <input class="aves-effect waves-light btn blue-grey darken-1" id="makeAdminBtn" type="submit" name="makeAdmin" class="validate" value="Make Admin">
-                        <input class="aves-effect waves-light btn blue-grey darken-1" id="makePeasantBtn" type="submit" name="makePeasant" class="validate" value="Make Peasant">
+                        <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteUserBtn" type="submit"
+                               name="deleteUser" class="validate" value="Delete">
+                        <input class="aves-effect waves-light btn blue-grey darken-1" id="makeAdminBtn" type="submit"
+                               name="makeAdmin" class="validate" value="Make Admin">
+                        <input class="aves-effect waves-light btn blue-grey darken-1" id="makePeasantBtn" type="submit"
+                               name="makePeasant" class="validate" value="Make Peasant">
                     </div>
                 </div>
             </div>
@@ -113,27 +117,32 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="Author" id="authorIn" type="text" class="validate" name="author" required>
+                            <input placeholder="Author" id="authorIn" type="text" class="validate" name="author"
+                                   required>
                             <label for="authorIn">Author</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="subject" id="subjectIn" type="text" class="validate" name="subject" required>
+                            <input placeholder="subject" id="subjectIn" type="text" class="validate" name="subject"
+                                   required>
                             <label for="subjectIn">Subject</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="company" id="companyIn" type="text" class="validate" name="company" required>
+                            <input placeholder="company" id="companyIn" type="text" class="validate" name="company"
+                                   required>
                             <label for="companyIn">Company</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="company" id="companyIn" type="number" class="validate" name="year" required>
+                            <input placeholder="company" id="companyIn" type="number" class="validate" name="year"
+                                   required>
                             <label for="year">Year</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="Edition Number" id="editionNumberIn" type="number" class="validate" name="editionNumber" required>
+                            <input placeholder="Edition Number" id="editionNumberIn" type="number" class="validate"
+                                   name="editionNumber" required>
                             <label for="editionNumberIn">Edition Number</label>
                         </div>
 
@@ -180,7 +189,8 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                         </div>
 
                         <div class="input-field col s12 m12">
-                            <textarea id="descriprionIn" name="description" class="materialize-textarea" length="1000"></textarea>
+                            <textarea id="descriprionIn" name="description" class="materialize-textarea"
+                                      length="1000"></textarea>
                             <label for="descriprionIn">Description</label>
                         </div>
                         <div class="input-field col s12 m12">
@@ -202,7 +212,8 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                         <label for="itemList">ID</label>
                     </div>
                     <div class="input-field col s12">
-                        <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteItemBtnId" type="submit" name="deleteItemName" class="validate" value="Search">
+                        <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteItemBtnId" type="submit"
+                               name="deleteItemName" class="validate" value="Search">
                     </div>
                 </div>
             </div>
@@ -213,16 +224,16 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('select').material_select();
         });
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('input#input_text, textarea#textarea1').characterCounter();
         });
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('ul.tabs').tabs();
         });
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.tooltipped').tooltip({delay: 50});
         });
     </script>

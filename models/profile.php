@@ -1,24 +1,25 @@
 <?php
 include_once "../classes/libraryUtility.php";
-if(isset($_COOKIE["PHPSESSID"])) {
+if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
 }
 
-if (isset($_GET["delateAcc"])){
+if (isset($_GET["delateAcc"])) {
     echo $_SESSION["user_id"]->deleteAcc();
     session_unset();
     session_destroy();
 }
-if(isset($_POST)){
-    echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"],$_POST["surname"],$_POST["dni"],$_POST["address"]);
-    if ($_FILES["profilePhoto"]["error"] != 4){
+if (isset($_POST)) {
+    echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"], $_POST["surname"], $_POST["dni"], $_POST["address"]);
+    if ($_FILES["profilePhoto"]["error"] != 4) {
         echo uploadPhoto();
     }
 }
 
-function uploadPhoto(){
+function uploadPhoto()
+{
     $db = new DB();
-    $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '".$_SESSION["user_id"]->getEmail()."'");
+    $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '" . $_SESSION["user_id"]->getEmail() . "'");
     $check = getimagesize($_FILES["profilePhoto"]["tmp_name"]);
     $target_dir = "..\\img\\profile\\";
     $file_ext = strtolower(end(explode('.', $_FILES['profilePhoto']['name'])));

@@ -32,6 +32,7 @@ $(document).ready(function () {
         })
     })
 })
+
 /*Delete User*/
 $(document).ready(function () {
     $("#deleteUserBtn").click(function () {
@@ -43,13 +44,13 @@ $(document).ready(function () {
 
 /*Return today*/
 
-    $(document).ready(function () {
-        $("#returnTodayBtn").click(function () {
-            $.get("models/admin.php", {returnInfo: true}, function (data) {
-                $("#returnList").empty();
-                $("#returnList").html(data);
-            })
+$(document).ready(function () {
+    $("#returnTodayBtn").click(function () {
+        $.get("models/admin.php", {returnInfo: true}, function (data) {
+            $("#returnList").empty();
+            $("#returnList").html(data);
         })
+    })
 })
 
 /*Make Admin*/
@@ -88,6 +89,28 @@ $(document).ready(function () {
                 Materialize.toast(data, 4000);
             }, error: function () {
                 alert("okey");
+            }
+        });
+    });
+});
+
+/*Register User*/
+
+$(document).ready(function () {
+    $("#registerUserAdmin").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: "models/admin.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                Materialize.toast(data, 4000);
+            }, error: function () {
+                alert("Fallo de JS");
             }
         });
     });
