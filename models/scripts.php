@@ -1,5 +1,11 @@
 <?php
 include_once "../classes/libraryUtility.php";
+
+/*Dynamic call*/
+if (isset($_GET["action"])){
+    $_SESSION["user_id"]->$_GET["action"]($_GET["info"]);
+}
+
 $library = new Utility();
 if(isset($_COOKIE["PHPSESSID"])) {
     session_start();

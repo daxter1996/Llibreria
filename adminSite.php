@@ -161,7 +161,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                                 <label>Type</label>
                             </div>
                             <div class="file-field input-field col s12">
-                                <div class="btn">
+                                <div class="btn blue-grey">
                                     <span>Image</span>
                                     <input type="file" name="mainPhoto">
                                 </div>
@@ -171,7 +171,7 @@ if(!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin){
                             </div>
 
                             <div class="file-field input-field col s12">
-                                <div class="btn">
+                                <div class="btn blue-grey">
                                     <span>Main Image</span>
                                     <input type="file" name="inPhoto">
                                 </div>

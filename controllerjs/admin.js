@@ -43,13 +43,13 @@ $(document).ready(function () {
 
 /*Return today*/
 
-$(document).ready(function () {
-    $("#returnTodayBtn").click(function () {
-        $.get("models/admin.php", {returnInfo: true}, function (data) {
-            $("#returnList").empty();
-            $("#returnList").html(data);
+    $(document).ready(function () {
+        $("#returnTodayBtn").click(function () {
+            $.get("models/admin.php", {returnInfo: true}, function (data) {
+                $("#returnList").empty();
+                $("#returnList").html(data);
+            })
         })
-    })
 })
 
 /*Make Admin*/

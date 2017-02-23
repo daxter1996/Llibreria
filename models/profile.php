@@ -11,7 +11,7 @@ if (isset($_GET["delateAcc"])){
 }
 if(isset($_POST)){
     echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"],$_POST["surname"],$_POST["dni"],$_POST["address"]);
-    if (!empty($_FILES)){
+    if ($_FILES["profilePhoto"]["error"] != 4){
         echo uploadPhoto();
     }
 }
@@ -35,3 +35,14 @@ function uploadPhoto(){
     }
     return 'Some error';
 }
+
+/*
+No changes detected
+Warning
+: getimagesize(): Filename cannot be empty in
+C:\xampp\htdocs\web\Llibreria\models\profile.php
+on line
+22
+
+File is not an imag
+*/

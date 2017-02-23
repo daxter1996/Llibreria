@@ -44,6 +44,7 @@ if(isset($_COOKIE["PHPSESSID"])) {
                         echo "<li><a href='librarianSite.php'>Librarian Site</a></li>";
                     }
                     echo "<li><a href='userTemplate.php'>Profile</a></li>";
+                    echo "<li><a href='booked.php'>Booked Items</a></li>";
                     echo "<li><a href='close.php'>Close session</a></li>";
                 }else{
                     echo "<li><a href='login.php'>Login</a></li>";
