@@ -20,7 +20,7 @@ if (isset($_COOKIE["PHPSESSID"])) {
 <header>
 <nav>
     <div class="nav-wrapper blue-grey">
-        <a href="index.php" class="brand-logo center">Jesus' Library</a>
+        <a href="index.php" class="brand-logo center"><img src="img/logoWhite.png" style="margin-top: 10px"></a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="left hide-on-med-and-down">
             <li>
