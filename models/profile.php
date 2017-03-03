@@ -4,15 +4,30 @@ if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
 }
 
-if (isset($_GET["delateAcc"])) {
-    echo $_SESSION["user_id"]->deleteAcc();
-    session_unset();
-    session_destroy();
+if (isset($_POST["action"])) {
+    echo deleteAcc();
 }
-if (isset($_POST)) {
+
+if ($_POST["action"] == "afsdf") {
     echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"], $_POST["surname"], $_POST["dni"], $_POST["address"]);
     if ($_FILES["profilePhoto"]["error"] != 4) {
         echo uploadPhoto();
+    }
+}
+
+function deleteAcc(){
+    $db = new DB();
+    $sql = "delete from user  where email = '".$_SESSION["user_id"]->getEmail()."'";
+    if ($_POST["email"] == $_SESSION["user_id"]->getEmail()){
+        if ($db->insertBd($sql)){
+            session_unset();
+            session_destroy();
+            echo "Account Deleted :(";
+        }else{
+            echo "Error";
+        }
+    }else{
+        echo "Incorrect Email";
     }
 }
 

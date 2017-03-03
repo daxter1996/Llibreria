@@ -31,9 +31,7 @@ class DB
         $array = array();
         $bd = $this->bdConect();
         $result = $bd->query($sql);
-        if ($result === false) {
-            echo "No hi ha resultats";
-        } else {
+        if ($result !== false) {
             while ($row = $result->fetch_assoc()) {
                 array_push($array, $row);
             }

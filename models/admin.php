@@ -55,8 +55,7 @@ if (isset($_GET["makePeasant"])) {
 /*Delete Users*/
 /*Suggest Remove users*/
 
-function suggestRemoveUser()
-{
+function suggestRemoveUser(){
     $db = new DB();
     $itemList = $_GET['deleteUserList'];
     $sql = "select email,id from user where email like '$itemList%'";

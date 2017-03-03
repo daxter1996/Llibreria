@@ -1,0 +1,4 @@
+borrow=3
+protection=med,10;high,23;low,25
+lending=dvd,high;Book,medium;Magazine,medium
+penality=20

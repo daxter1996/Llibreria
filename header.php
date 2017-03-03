@@ -3,6 +3,8 @@ include_once "classes/libraryUtility.php";
 $library = new Utility();
 if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
+}else{
+
 }
 
 ?>
@@ -27,7 +29,7 @@ if (isset($_COOKIE["PHPSESSID"])) {
                 <a>
                     <?php
                         if(isset($_SESSION["user_id"])) {
-                            echo "<li><a>" . $_SESSION["user_id"]->getName() . "</a></li>";
+                            echo "<li><a href='userTemplate.php'><strong>" . $_SESSION["user_id"]->getName() . "</strong> profile</a></li>";
                         }
                     ?>
                 </a>
@@ -43,7 +45,6 @@ if (isset($_COOKIE["PHPSESSID"])) {
                     if($_SESSION["user_id"] instanceof librarian) {
                         echo "<li><a href='librarianSite.php'>Librarian Site</a></li>";
                     }
-                    echo "<li><a href='userTemplate.php'>Profile</a></li>";
                     echo "<li><a href='booked.php'>Booked Items</a></li>";
                     echo "<li><a href='close.php'>Close session</a></li>";
                 }else{
@@ -54,24 +55,32 @@ if (isset($_COOKIE["PHPSESSID"])) {
             ?>
         </ul>
         <ul class="side-nav" id="mobile-demo">
-            <li><a href="catalog.php">Catalog</a></li>
+            <li><a href="catalog.php">Catalogue</a></li>
             <?php
-            if(isset($_SESSION["user_id"]) &&  $_SESSION["user_id"] instanceof admin) {
-                echo "<li><a href='adminSite.php'>Admin Site</a></li>";
-            }
             if(isset($_SESSION["user_id"])) {
+                if($_SESSION["user_id"] instanceof admin) {
+                    echo "<li><a href='adminSite.php'>Admin Site</a></li>";
+                }
+                if($_SESSION["user_id"] instanceof librarian) {
+                    echo "<li><a href='librarianSite.php'>Librarian Site</a></li>";
+                }
+                echo "<li><a href='userTemplate.php'><strong>" . $_SESSION["user_id"]->getName() . "</strong> profile</a></li>";
+                echo "<li><a href='booked.php'>Booked Items</a></li>";
                 echo "<li><a href='close.php'>Close session</a></li>";
-                echo "<li><a href='userTemplate.php'>Profile</a></li>";
             }else{
                 echo "<li><a href='login.php'>Login</a></li>";
                 echo "<li><a href='register.php'>Register</a></li>";
+
             }
             ?>
         </ul>
     </div>
     <script type="text/javascript">
-        $(".dropdown-button").dropdown();
-        $(".button-collapse").sideNav();
+        $( document ).ready(function(){
+            $(".dropdown-button").dropdown();
+            $(".button-collapse").sideNav();
+        })
+
     </script>
 </nav>
     </header>

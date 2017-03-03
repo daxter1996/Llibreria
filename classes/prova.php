@@ -7,5 +7,6 @@ include_once("librarian.php");
 include_once("magazine.php");
 include_once("user.php");
 */
-include_once("libraryUtility.php");
+$hash = password_hash('user', PASSWORD_DEFAULT);
+echo $hash;
 ?>

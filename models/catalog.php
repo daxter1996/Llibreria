@@ -83,7 +83,7 @@ function searchItem(){
 function bookItem(){
     $db = new DB();
     if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
-        $sql = "INSERT INTO booking VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."')";
+        $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."', '')";
         if($db->insertBd($sql)){
             echo "Booked!";
             exit();

@@ -6,6 +6,7 @@ include_once("librarian.php");
 include_once("magazine.php");
 include_once("user.php");
 include_once("db.php");
+error_reporting(E_ALL);
 
 class Utility {
     private $content = [];

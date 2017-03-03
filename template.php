@@ -27,13 +27,16 @@ $llibre = $library->getBookById($_GET["id"])
             <input type="hidden" value="<?php echo $_GET["id"] ?>" id="idBook">
             <?php
             $db = new DB();
-            $sql = "select * from booking where idBook = " . $_GET["id"];
+            $sql = "select * from booked where idBook = " . $_GET["id"]. " and returned = false";
             $result = $db->returnFromBd($sql);
 
             if (isset($_SESSION["user_id"])) {
                 echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
-                if ($_SESSION["user_id"]->getId() == $result["idUser"]) {
+                if ($result != null && $_SESSION["user_id"]->getId() == $result["idUser"]) {
                     echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
+                }
+                if($_SESSION["user_id"] instanceof librarian){
+                    echo "<a href='history.php?id=".$_GET["id"]."' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>timeline</i>History</a>";
                 }
             } else {
                 echo "<a disabled href='#booking' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>bookmark</i>Booking</a>";
@@ -53,9 +56,9 @@ $llibre = $library->getBookById($_GET["id"])
             <p>
                 <?php
                 $db = new DB();
-                $sql = "Select * from booking where idBook = " . $_GET["id"];
+                $sql = "Select * from booked where idBook = " . $_GET["id"] . " and returned = false";
                 foreach ($db->returnArrayFrombd($sql) as $value) {
-                    echo "From " . $value["outDay"] . " to " . $value["backDay"];
+                    echo "From " . $value["outDay"] . " to " . $value["inDay"];
                     echo "<hr/>";
                 }
                 ?>
@@ -79,6 +82,7 @@ $llibre = $library->getBookById($_GET["id"])
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script type="text/javascript" src="js/materialize.min.js"></script>
 <script type="text/javascript" src="controllerjs/catalog.js"></script>
+<script type="text/javascript" src="js/datepicker/lib/picker.date.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.modal').modal();
@@ -98,19 +102,12 @@ $llibre = $library->getBookById($_GET["id"])
             }
         });
     });
-    /** Days to be disabled as an array */
-    var disableddates = ["15-02-2017", "12-11-2014", "12-25-2014", "12-20-2014"];
-
-    function DisableSpecificDates(date) {
-        var string = jQuery.datepicker.formatDate('dd-mm-yy', date);
-        return [disableddates.indexOf(string) == -1];
-    }
-
-    $(function () {
-        $("#date").datepicker({
-            beforeShowDay: DisableSpecificDates
-        });
-    });
+    $('.datepicker').pickadate({
+        disable: [{ from: [2016, 3, 15], to: [2016, 3, 25] },{ from: [2016, 3, 17], to: [2016, 3, 18]}
+        ],
+        weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        showMonthsShort: true
+    })
 </script>
 </body>
 <?php include_once "footer.php"; ?>

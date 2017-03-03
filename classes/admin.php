@@ -99,7 +99,7 @@ class admin extends person
         if ($db->insertBd($query)) {
             return "User Registered!";
         } else {
-            return "Register Error";
+                return "Register Error";
         }
     }
 
@@ -135,6 +135,21 @@ class admin extends person
         }
     }
 
-}
+    function settings($post){
+        $route = "../settings/settings.txt";
 
+        $tmp = "borrow=". $post["borrow"] . PHP_EOL;
+        $tmp .= "protection=med,". $post["mediumProtection"] . ";high," . $post["highProtection"]. ";low," . $post["lowProtection"] . PHP_EOL;
+        $tmp .= "lending=dvd,". $post["dvd"] . ";Book," . $post["book"]. ";Magazine," . $post["magazine"] . PHP_EOL;
+        $tmp .= "penality=". $post["penalty"] . PHP_EOL;
+
+
+        $file = fopen($route, "wb");
+        fwrite($file,$tmp);
+        fclose($file);
+        echo ("The settings has been changed correctly");
+    }
+
+
+}
 ?>

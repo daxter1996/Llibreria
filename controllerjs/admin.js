@@ -115,3 +115,25 @@ $(document).ready(function () {
         });
     });
 });
+
+/*Change Settings*/
+
+$(document).ready(function () {
+    $("#settings").submit(function (e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+        $.ajax({
+            url: "models/admin.php",
+            type: "POST",
+            data: formData,
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function (data) {
+                Materialize.toast(data, 4000);
+            }, error: function () {
+                alert("Fallo de JS");
+            }
+        });
+    });
+});

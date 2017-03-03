@@ -41,7 +41,7 @@ include_once "header.php";
 
         <div class="offset-m1 m10 offset-s0 col z-depth-2" style="display: none" id="editProfile">
             <br/>
-            <div class="col offset-m1 s9">
+            <div class="col offset-m1 s12 m10">
                 <h3>Edit information</h3>
                 <form method="post" onsubmit="return false" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail() ?>">
@@ -98,17 +98,16 @@ include_once "header.php";
             <div class="modal-content">
                 <h4>Confirm email to delete this account</h4>
                 <p>
-                <form>
-                    <input id="dni" name="dni" type="text" placeholder="Email" class="validate">
+                <form method="post" onsubmit="return false" id="deleteAccForm">
+                    <input type="hidden" name="action" value="deleteAcc">
+                    <input name="email" type="text" placeholder="Email" class="validate" required>
+                    <input class="btn blue-grey" type="submit" value="Agree">
                 </form>
 
                 </p>
             </div>
             <div class="modal-footer">
-                <a href="#!"
-                   class=" modal-action modal-close waves-effect waves-green btn-flat green lighten-2">Agree</a>
-                <a href="#!"
-                   class=" modal-action modal-close waves-effect waves-green btn-flat red lighten-2">Cancel</a>
+                <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat red darken-1 white-text">Cancel</a>
             </div>
         </div>
     </div>

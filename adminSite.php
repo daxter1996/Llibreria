@@ -219,37 +219,66 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                 </div>
             </div>
             <div class="row" id="changeSettings">
+
+                <?php
+                    require_once("models/settings.php");
+                    echo $lending["Magazine"];
+                ?>
+
                 <div class="col s12 m9 offset-l1">
                     <h4>Settings</h4>
-                    <form method="post" id="settings">
+                    <form method="post" id="settings" onsubmit="return false">
                         <div class="row">
-                            <input type="hidden" name="settings">
+                            <input type="hidden" name="action" value="settings">
                             <div class="input-field col s12">
-                                <input id="borrow" name="borrow" type="text" class="validate" required>
+                                <input id="borrow" name="borrow" type="text" class="validate" value="<?php echo $borrow?>">
                                 <label for="borrow">Borrow</label>
+                            </div>
+                            <h5>Protection of Items</h5>
+                            <div class="input-field col s12">
+                                <select name="dvd" id="stateIn">
+                                    <option value="low" <?php if($lending["dvd"] == "low") echo "selected";  ?>>Low</option>
+                                    <option value="medium" <?php if($lending["dvd"] == "medium") echo "selected";  ?>>Medium</option>
+                                    <option value="high" <?php if($lending["dvd"] == "high") echo "selected"; ?>>High</option>
+                                </select>
+                                <label>DVD</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <select name="book" id="stateIn">
+                                    <option value="low" <?php if($lending["Book"] == "low") echo "selected";  ?>>Low</option>
+                                    <option value="medium" <?php if($lending["Book"] == "medium") echo "selected";  ?>>Medium</option>
+                                    <option value="high" <?php if($lending["Book"] == "high") echo "selected"; ?>>High</option>
+                                </select>
+                                <label>Book</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <select name="magazine" id="stateIn">
+                                    <option value="low" <?php if($lending["Magazine"] == "low") echo "selected";  ?>>Low</option>
+                                    <option value="medium" <?php if($lending["Magazine"] == "medium") echo "selected";  ?>>Medium</option>
+                                    <option value="high" <?php if($lending["Magazine"] == "high") echo "selected"; ?>>High</option>
+                                </select>
+                                <label>Magaine</label>
                             </div>
                             <h5>Protection Levels</h5>
                             <div class="input-field col s12">
-                                <input id="dvdprotect" name="dvdprotect" type="text" class="validate" required>
-                                <label for="dvdprotect">DVD</label>
+                                <input id="lowProtection" name="lowProtection" value="<?php echo $protection["low"]?>" type="text" class="validate">
+                                <label for="lowProtection">Low</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="bookprotect" name="bookprotect" type="password" class="validate" required>
-                                <label for="bookprotect">Book</label>
+                                <input id="mediumProtection" name="mediumProtection" value="<?php echo $protection["med"]?>" type="text" class="validate">
+                                <label for="mediumProtection">Medium</label>
                             </div>
                             <div class="input-field col s12">
-                                <input id="magazineprotect" name="magazineprotect" type="text" class="validate"
-                                       required>
-                                <label for="magazineprotect">Magazine</label>
+                                <input id="highProtection" name="highProtection" value="<?php echo $protection["high"]?>" type="text" class="validate">
+                                <label for="highProtection">High</label>
                             </div>
                             <h5>Penalty</h5>
                             <div class="input-field col s12">
-                                <input id="penalty" name="penalty" type="text" class="validate" required>
+                                <input id="penalty" name="penalty" type="text" class="validate" value="<?php echo $penality?>">
                                 <label for="penalty">Penalty</label>
                             </div>
                             <div class="input-field col s12">
-                                <input class="btn blue-grey" name="Save settings" type="submit" class="validate"
-                                       required>
+                                <input class="btn blue-grey" value="Save Settings" type="submit" class="validate" required>
                             </div>
                         </div>
                     </form>

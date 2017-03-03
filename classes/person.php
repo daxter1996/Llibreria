@@ -39,16 +39,10 @@ require_once("db.php");
            $this->email = $email;
         }
 
-        public function deleteAcc(){
-            $db = new DB();
-            $sql = "delete from user  where email = '".$this->email."'";
-            return $db->insertBd($sql);
-        }
-
-
         function returnBook($id){
             $db = new DB();
-            $sql = "DELETE FROM booking WHERE idBook = " . $id;
+            $time = date('Y-m-d');
+            $sql = "UPDATE booked SET returned = '".$time."' WHERE idBook = " . $id;
             if($db->insertBd($sql)){
                 echo "Thanks!";
                 exit();
