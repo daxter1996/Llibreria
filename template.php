@@ -88,6 +88,7 @@ $llibre = $library->getBookById($_GET["id"])
         $('.modal').modal();
     });
     $(document).ready(function () {
+
         $('.tooltipped').tooltip({delay: 50});
     });
     $(document).ready(function () {
