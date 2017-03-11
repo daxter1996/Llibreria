@@ -51,19 +51,6 @@ $llibre = $library->getBookById($_GET["id"])
 <div id="booking" class="modal">
     <div class="modal-content">
         <h4>Book: <?php echo $llibre->getTitle(); ?></h4>
-        <button class="blue-grey btn" id="showDays">Show days</button>
-        <div id="itemBookedDays" style="display: none;">
-            <p>
-                <?php
-                $db = new DB();
-                $sql = "Select * from booked where idBook = " . $_GET["id"] . " and returned = false";
-                foreach ($db->returnArrayFrombd($sql) as $value) {
-                    echo "From " . $value["outDay"] . " to " . $value["inDay"];
-                    echo "<hr/>";
-                }
-                ?>
-            </p>
-        </div>
         <form method="post" id="bookform">
             <h5>First Day</h5>
             <input type="date" class="datepicker" name="firstD" id="firstDay" required>
@@ -91,24 +78,21 @@ $llibre = $library->getBookById($_GET["id"])
 
         $('.tooltipped').tooltip({delay: 50});
     });
-    $(document).ready(function () {
-        $("#showDays").click(function () {
-            var stateDisplay = document.getElementById("itemBookedDays").style.display;
-            if (stateDisplay == "none") {
-                document.getElementById("itemBookedDays").style.display = "block";
-                document.getElementById("showDays").innerHTML = "Ocult Days";
-            } else {
-                document.getElementById("itemBookedDays").style.display = "none";
-                document.getElementById("showDays").innerHTML = "Show days";
-            }
-        });
+    var data1 = null;
+    var url = "js/blockdates.php";
+    $.getJSON(url, function (data1) {
+        console.log(data1);
+
     });
     $('.datepicker').pickadate({
-        disable: [{ from: [2016, 3, 15], to: [2016, 3, 25] },{ from: [2016, 3, 17], to: [2016, 3, 18]}
-        ],
+        format: 'yyyy-mm-dd',
+        disable: data1,
         weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
         showMonthsShort: true
     })
+
+
+
 </script>
 </body>
 <?php include_once "footer.php"; ?>
