@@ -14,7 +14,7 @@ class Utility {
     public function setContent($content){$this->content = $content;}
 
     function __construct(){
-        $this->getAllContentFromBd();
+        //$this->getAllContentFromBd();
     }
 
     public function getAllContentFromBd(){

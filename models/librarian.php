@@ -1,7 +1,7 @@
 <?php
 require_once ("../classes/libraryUtility.php");
-$_GET["action"]($_GET["info"]);
 
+$_GET["action"]($_GET["info"]);
 
 function suggestHistoryUser($userEmail){
     if($userEmail == ""){

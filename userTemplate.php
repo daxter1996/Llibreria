@@ -43,9 +43,11 @@ include_once "header.php";
             <br/>
             <div class="col offset-m1 s12 m10">
                 <h3>Edit information</h3>
+
                 <form method="post" onsubmit="return false" id="editProfileForm" enctype="multipart/form-data">
                     <input type="hidden" name="accountEmail" value="<?php echo $_SESSION["user_id"]->getEmail() ?>">
                     <input type="hidden" name="action" value="editProfile">
+                    <input type="hidden" name="controller" value="session">
                     <div class="row">
                         <div class="input-field col s12">
                             <input id="name" name="name" type="text""
@@ -62,11 +64,6 @@ include_once "header.php";
                                    value="<?php echo $_SESSION["user_id"]->getAddress() ?>" class="validate">
                             <label for="address">Address</label>
                         </div>
-                        <div class="input-field col s12 ">
-                            <input id="dni" name="dni" type="text" value="<?php echo $_SESSION["user_id"]->getDni() ?>"
-                                   class="validate">
-                            <label for="dni">DNI</label>
-                        </div>
                         <div class="file-field input-field col s12">
                             <div class="btn waves-light btn blue-grey darken-1">
                                 <span>Profile Image</span>
@@ -82,6 +79,7 @@ include_once "header.php";
                         </div>
                     </div>
                 </form>
+
                 <div class="row">
                     <a class="waves-effect waves-light btn blue-grey" href="#modal1">Delete Account</a>
                     <button onclick="cancelEdit()" class="btn blue-grey">Cancel</button>

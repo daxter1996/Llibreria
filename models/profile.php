@@ -4,16 +4,17 @@ if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
 }
 
-if (isset($_POST["action"])) {
-    echo deleteAcc();
-}
+/*Dynamic call*/
 
-if ($_POST["action"] == "afsdf") {
-    echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"], $_POST["surname"], $_POST["dni"], $_POST["address"]);
+if (isset($_POST["controller"]) && $_POST["controller"]== "session") {
+    echo $_SESSION["user_id"]->$_POST["action"]($_POST["name"], $_POST["surname"], $_POST["address"]);
     if ($_FILES["profilePhoto"]["error"] != 4) {
         echo uploadPhoto();
     }
+}else{
+    echo $_POST["action"]();
 }
+
 
 function deleteAcc(){
     $db = new DB();
@@ -37,7 +38,11 @@ function uploadPhoto()
     $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '" . $_SESSION["user_id"]->getEmail() . "'");
     $check = getimagesize($_FILES["profilePhoto"]["tmp_name"]);
     $target_dir = "..\\img\\profile\\";
-    $file_ext = strtolower(end(explode('.', $_FILES['profilePhoto']['name'])));
+
+    $fileName = explode('.',  $_FILES['profilePhoto']['name']);
+    $fds = end($fileName);
+
+    $file_ext = strtolower($fds);
     if ($check !== false) {
         $target_file_content = $target_dir . "profile_" . $return["id"] . '.' . $file_ext;
         if (file_exists($target_file_content)) {
@@ -45,20 +50,9 @@ function uploadPhoto()
         }
         move_uploaded_file($_FILES["profilePhoto"]["tmp_name"], $target_file_content);
 
-        return 'Profile Image Uploaded';
+        return '<br/>Profile Image Uploaded';
     } else {
         return 'File is not an image.';
     }
     return 'Some error';
 }
-
-/*
-No changes detected
-Warning
-: getimagesize(): Filename cannot be empty in
-C:\xampp\htdocs\web\Llibreria\models\profile.php
-on line
-22
-
-File is not an imag
-*/

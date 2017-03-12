@@ -5,18 +5,21 @@ if(isset($_COOKIE["PHPSESSID"])) {
     session_start();
 }
 
-/*SearchItem*/
-if(isset($_GET["searchName"])){
-    searchItem();
-}
-/*BookingForm*/
-if(isset($_POST["bookId"])){
-    bookItem();
+if(isset($_POST["action"])){
+   echo $_SESSION["user_id"]->$_POST["action"]($_POST);
 }
 
+if (isset($_GET["action"])) {
+    if(isset($_GET["controller"]) && $_GET["controller"] == "session"){
+        echo $_SESSION["user_id"]->$_GET["action"]($_GET["info"]);
+    }else{
+        $_GET["action"]();
+    }
+}
 
 function searchItem(){
     $library = new Utility();
+    $library->getAllContentFromBd();
     $arraySearch = [];
     if($_GET["searchName"] == ""){
         foreach ($library->getContent() as $value) {
@@ -80,19 +83,3 @@ function searchItem(){
     }
 }
 
-function bookItem(){
-    $db = new DB();
-    if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
-        $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$_POST["returnD"]."', '')";
-        if($db->insertBd($sql)){
-            echo "Booked!";
-            exit();
-        }else{
-            echo "Something goes wrong";
-            exit();
-        }
-    }else{
-        echo "Format of date invalid";
-        exit();
-    }
-}

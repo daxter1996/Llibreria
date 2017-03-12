@@ -7,16 +7,3 @@
         document.getElementById("profile").style.display = "block";
         document.getElementById("editProfile").style.display = "none";
     }
-
-    /*ReturnBook*/
-
-    $(document).ready(function () {
-        $("#returnBookBtn").click(function () {
-            $.get("models/scripts.php", {returnId: $("#idBook").val()}, function (data) {
-                Materialize.toast(data,4000);
-                setTimeout(function() {
-                    location.reload();
-                }, 2000);
-            })
-        })
-    })

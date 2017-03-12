@@ -1,8 +1,8 @@
 <?php
 include_once "header.php";
-if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
-    die("Page not Aviable Please Login as an Admin");
-}
+    if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
+        die("Page not Aviable Please Login as an Admin");
+    }
 ?>
 <body>
 <div class="containter">
@@ -32,9 +32,10 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
             </div>
             <div class="row" style="margin: 10px">
                 <div id="registerUser" class="col s12 m10 offset-l1">
-                    <h5>Register User</h5>
+                    <h5 class="center">Register User</h5>
                     <form method="post" id="registerUserAdmin" onsubmit="return false">
                         <input type="hidden" name="action" value="registerUser">
+                        <input type="hidden" name="controller" value="session">
                         <div class="input-field col s12 m6">
                             <input id="icon_prefix" name="name" type="text" class="validate" required>
                             <label for="icon_prefix">Name</label>
@@ -76,7 +77,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
 
             <div class="row">
                 <div id="deleteUser" class="col s12 m9 offset-l1">
-                    <h5>Delate User</h5>
+                    <h5 class="center">Delete User</h5>
                     <div class="input-field col s12">
                         <input type="text" list="userList" id="userListSuggest" class="validate">
                         <datalist id="userList">
@@ -107,10 +108,10 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
 
             <div id="addElement" class="row">
                 <div class="col s12 m9 offset-l1">
-                    <h5>Add Element</h5>
+                    <h5 class="center">Add Element</h5>
 
-                    <form enctype="multipart/form-data" id="add" method="post">
-                        <input type="hidden" name="hies">
+                    <form enctype="multipart/form-data" id="add" method="post" onsubmit="return false">
+                        <input type="hidden" name="action" value="addElement">
 
                         <div class="input-field col s6">
                             <input placeholder="Title" id="titleIn" type="text" class="validate" name="title" required>
@@ -118,37 +119,32 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="Author" id="authorIn" type="text" class="validate" name="author"
-                                   required>
+                            <input placeholder="Author" id="authorIn" type="text" class="validate" name="author" required>
                             <label for="authorIn">Author</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="subject" id="subjectIn" type="text" class="validate" name="subject"
-                                   required>
+                            <input placeholder="subject" id="subjectIn" type="text" class="validate" name="subject" required>
                             <label for="subjectIn">Subject</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="company" id="companyIn" type="text" class="validate" name="company"
-                                   required>
+                            <input placeholder="company" id="companyIn" type="text" class="validate" name="company" required>
                             <label for="companyIn">Company</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="company" id="companyIn" type="number" class="validate" name="year"
-                                   required>
+                            <input placeholder="company" id="companyIn" type="number" class="validate" name="year" required>
                             <label for="year">Year</label>
                         </div>
 
                         <div class="input-field col s6">
-                            <input placeholder="Edition Number" id="editionNumberIn" type="number" class="validate"
-                                   name="editionNumber" required>
+                            <input placeholder="Edition Number" id="editionNumberIn" type="number" class="validate" name="editionNumber" required>
                             <label for="editionNumberIn">Edition Number</label>
                         </div>
 
                         <div class="input-field col s12">
-                            <input placeholder="ISBN" id="isbnIn" type="text" class="validate" name="isbn">
+                            <input placeholder="ISBN" id="isbnIn" type="text" class="validate" name="isbn" required>
                             <label for="isbnIn">ISBN</label>
                         </div>
 
@@ -162,7 +158,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                         </div>
 
                         <div class="input-field col s6">
-                            <select name="type" id="stateIn" required>
+                            <select name="type" id="stateIn">
                                 <option value="2">DVD</option>
                                 <option value="1">Book</option>
                                 <option value="3">Magazine</option>
@@ -175,7 +171,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                                 <input type="file" name="mainPhoto">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="Main Photo">
+                                <input class="file-path validate" type="text" placeholder="Main Photo" required>
                             </div>
                         </div>
 
@@ -185,13 +181,13 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                                 <input type="file" name="inPhoto">
                             </div>
                             <div class="file-path-wrapper">
-                                <input class="file-path validate" type="text" placeholder="In Photo">
+                                <input class="file-path validate" type="text" placeholder="In Photo" required>
                             </div>
                         </div>
 
                         <div class="input-field col s12 m12">
                             <textarea id="descriprionIn" name="description" class="materialize-textarea"
-                                      length="1000"></textarea>
+                                      length="1000" required></textarea>
                             <label for="descriprionIn">Description</label>
                         </div>
                         <div class="input-field col s12 m12">
@@ -205,7 +201,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
 
             <div class="row" id="deleteElement">
                 <div class="col s12 m9 offset-l1">
-                    <h5>Delate Element</h5>
+                    <h5 class="center">Delate Element</h5>
                     <div class="input-field col s12">
                         <input type="text" list="itemList" name="removeItems" id="listSuggest" class="validate">
                         <datalist id="itemList">
@@ -214,7 +210,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                     </div>
                     <div class="input-field col s12">
                         <input class="aves-effect waves-light btn blue-grey darken-1" id="deleteItemBtnId" type="submit"
-                               name="deleteItemName" class="validate" value="Search">
+                               name="deleteItemName" class="validate" value="Delete">
                     </div>
                 </div>
             </div>
@@ -222,11 +218,10 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
 
                 <?php
                     require_once("models/settings.php");
-                    echo $lending["Magazine"];
                 ?>
 
                 <div class="col s12 m9 offset-l1">
-                    <h4>Settings</h4>
+                    <h5 class="center">Settings</h5>
                     <form method="post" id="settings" onsubmit="return false">
                         <div class="row">
                             <input type="hidden" name="action" value="settings">
@@ -238,24 +233,24 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof admin) {
                             <div class="input-field col s12">
                                 <select name="dvd" id="stateIn">
                                     <option value="low" <?php if($lending["dvd"] == "low") echo "selected";  ?>>Low</option>
-                                    <option value="medium" <?php if($lending["dvd"] == "medium") echo "selected";  ?>>Medium</option>
+                                    <option value="med" <?php if($lending["dvd"] == "med") echo "selected";  ?>>Medium</option>
                                     <option value="high" <?php if($lending["dvd"] == "high") echo "selected"; ?>>High</option>
                                 </select>
                                 <label>DVD</label>
                             </div>
                             <div class="input-field col s12">
                                 <select name="book" id="stateIn">
-                                    <option value="low" <?php if($lending["Book"] == "low") echo "selected";  ?>>Low</option>
-                                    <option value="medium" <?php if($lending["Book"] == "medium") echo "selected";  ?>>Medium</option>
-                                    <option value="high" <?php if($lending["Book"] == "high") echo "selected"; ?>>High</option>
+                                    <option value="low" <?php if($lending["book"] == "low") echo "selected";  ?>>Low</option>
+                                    <option value="med" <?php if($lending["book"] == "med") echo "selected";  ?>>Medium</option>
+                                    <option value="high" <?php if($lending["book"] == "high") echo "selected"; ?>>High</option>
                                 </select>
                                 <label>Book</label>
                             </div>
                             <div class="input-field col s12">
                                 <select name="magazine" id="stateIn">
-                                    <option value="low" <?php if($lending["Magazine"] == "low") echo "selected";  ?>>Low</option>
-                                    <option value="medium" <?php if($lending["Magazine"] == "medium") echo "selected";  ?>>Medium</option>
-                                    <option value="high" <?php if($lending["Magazine"] == "high") echo "selected"; ?>>High</option>
+                                    <option value="low" <?php if($lending["magazine"] == "low") echo "selected";  ?>>Low</option>
+                                    <option value="med" <?php if($lending["magazine"] == "med") echo "selected";  ?>>Medium</option>
+                                    <option value="high" <?php if($lending["magazine"] == "high") echo "selected"; ?>>High</option>
                                 </select>
                                 <label>Magaine</label>
                             </div>

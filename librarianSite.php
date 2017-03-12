@@ -33,11 +33,12 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof librarian) 
                 <li class="tab col s2"><a class="active" href="#top10">Top 10</a></li>
                 <li class="tab col s2"><a href="#rentMonth">Rents per Month</a></li>
             </ul>
-            <div id="top10" style="height: 400px;"></div>
-            <div id="rentMonth" style="height: 400px;"></div>
+            <div class="container">
+                <div id="top10"  style="height: 400px"></div>
+                <div id="rentMonth" style="height: 400px;"></div>
+            </div>
         </div>
     </div>
-
 </div>
 
 

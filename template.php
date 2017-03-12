@@ -27,13 +27,24 @@ $llibre = $library->getBookById($_GET["id"])
             <input type="hidden" value="<?php echo $_GET["id"] ?>" id="idBook">
             <?php
             $db = new DB();
-            $sql = "select * from booked where idBook = " . $_GET["id"]. " and returned = false";
+            $sql = "select * from booked where idBook = " . $_GET["id"]. " and returned = false and idUser = " . $_SESSION["user_id"]->getId();
             $result = $db->returnFromBd($sql);
 
+            $time = strtotime($result["outDay"]);
+            $time2 = strtotime($result["inDay"]);
+
+            $actual = new DateTime(date('Y-m-d'));
+            $datet = new DateTime(date("Y-m-d",$time));
+            $datet2 = new DateTime(date("Y-m-d",$time2));
             if (isset($_SESSION["user_id"])) {
-                echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
                 if ($result != null && $_SESSION["user_id"]->getId() == $result["idUser"]) {
-                    echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
+                    if($actual >= $datet && $actual <= $datet2){
+                        echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
+                    }else{
+                        echo "<a id='cancelBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Cancel book</a>";
+                    }
+                }else{
+                    echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";
                 }
                 if($_SESSION["user_id"] instanceof librarian){
                     echo "<a href='history.php?id=".$_GET["id"]."' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>timeline</i>History</a>";
@@ -49,16 +60,24 @@ $llibre = $library->getBookById($_GET["id"])
 
 <!-- Modal Structure -->
 <div id="booking" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" style="height: 500px">
         <h4>Book: <?php echo $llibre->getTitle(); ?></h4>
+        <?php
+        require_once "models/settings.php";
+        $maxDay = $protection[$lending[get_class($llibre)]];
+        ?>
         <form method="post" id="bookform">
-            <h5>First Day</h5>
+            <h5>Book Day</h5>
             <input type="date" class="datepicker" name="firstD" id="firstDay" required>
-            <h5>Return Day</h5>
-            <input type="date" class="datepicker" name="returnD" id="returnD" required>
             <input type="hidden" name="bookId" value="<?php echo $_GET["id"] ?>">
-            <input type="submit" class="waves-effect btn blue-grey">
+            <input type="hidden" name="action" value="bookItem">
+            <input type="hidden" name="model" value="session">
+            <input type="hidden" name="maxDay" value="<?php echo $maxDay ?>">
+            <input type="submit" value="Book!" class="waves-effect btn blue-grey">
         </form>
+
+        <h5>This item will be booked for max <?php echo $maxDay ?> days.</h5>
+
     </div>
     <div class="modal-footer">
         <a href="#!" class=" modal-action modal-close waves-effect waves-red btn red lighten-3">Cancel</a>
@@ -78,18 +97,17 @@ $llibre = $library->getBookById($_GET["id"])
 
         $('.tooltipped').tooltip({delay: 50});
     });
-    var data1 = null;
-    var url = "js/blockdates.php";
+    var url = "js/blockdates.php?id=" + <?php echo $_GET["id"]?>;
     $.getJSON(url, function (data1) {
         console.log(data1);
-
+        $('.datepicker').pickadate({
+            format: 'yyyy-mm-dd',
+            disable: data1,
+            weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            showMonthsShort: true
+        })
     });
-    $('.datepicker').pickadate({
-        format: 'yyyy-mm-dd',
-        disable: data1,
-        weekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-        showMonthsShort: true
-    })
+
 
 
 

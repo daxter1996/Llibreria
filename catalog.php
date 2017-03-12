@@ -29,6 +29,7 @@
         <div class="col s12 m10 offset-m1" id="searchResult">
             <!-- Plantila vista general de un libre-->
             <?php
+            $library->getAllContentFromBd();
             foreach ($library->getContent() as $value) {
                 echo "<div class='col s12 m3'>";
                 echo "<div class='card'>";
