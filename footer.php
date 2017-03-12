@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col l6 s12">
-                <h5 class="white-text">Jesus's Library </h5>
+                <h5 class="white-text"><a href="index.php" class="brand-logo center"><img src="img/logoWhite.png" style="height: 40px; margin: -5px;"></a> Library </h5>
                 <p class="grey-text text-lighten-4"></p>
             </div>
             <div class="col l4 offset-l2 s12">
@@ -17,11 +17,10 @@
                     if (isset($_SESSION["user_id"])) {
                         echo "<li><a class='grey-text text-lighten-3' href='close.php'>Close session</a></li>";
                     } else {
-                        echo "<li><a class='grey-text text-lighten-3' href='login.php'>Login</a></li>";
+                        echo "<li><a class='grey-text text-lighten-3' href='loginModel.php'>Login</a></li>";
                         echo "<li><a class='grey-text text-lighten-3' href='register.php'>Register</a></li>";
 
                     }
-
                     ?>
                 </ul>
             </div>

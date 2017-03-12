@@ -5,7 +5,7 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof librarian) 
 }
 ?>
 <body>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="col s12">
         <ul class="tabs blue-grey">
             <li class="tab col s6"><a class="active" href="#manageUsers">History User</a></li>
@@ -30,12 +30,10 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof librarian) 
 
         <div id="stadistic">
             <ul class="tabs blue-grey">
-                <li class="tab col s2"><a class="active" href="#top10">Top 10</a></li>
-                <li class="tab col s2"><a href="#rentMonth">Rents per Month</a></li>
+                <li class="tab col s2"><a class="active" href="#top10chard">Top 10</a></li>
             </ul>
-            <div class="container">
+            <div class="container" id="top10chard">
                 <div id="top10"  style="height: 400px"></div>
-                <div id="rentMonth" style="height: 400px;"></div>
             </div>
         </div>
     </div>
@@ -87,21 +85,6 @@ if (!isset($_SESSION["user_id"]) || !$_SESSION["user_id"] instanceof librarian) 
             });
         chart.render();
 
-    });
-    $.getJSON('js/month.php', function (data1) {
-        var chart = new CanvasJS.Chart("rentMonth", {
-            title: {
-                text: "Rents per month"
-            },
-            axisX: {
-                interval: 1
-            },
-            data: [{
-                type: "line",
-                dataPoints: data1
-            }]
-        });
-        chart.render();
     });
 
 </script>

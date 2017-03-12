@@ -1,5 +1,6 @@
 <?php include_once "header.php"; ?>
 <?php
+
 $llibre = $library->getBookById($_GET["id"]);
 $sql = "SELECT * FROM booked inner join items INNER join user where idBook = items.id and idUser = user.id and idBook = " . $_GET["id"];
 $db = new DB();
@@ -7,7 +8,7 @@ $info = $db->returnArrayFrombd($sql);
 ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <div class="col s12 center">
             <h3>History of <?php echo $llibre->getTitle() ?></h3>

@@ -1,11 +1,12 @@
 <?php
-include_once("books.php");
-include_once("admin.php");
-include_once("dvd.php");
-include_once("librarian.php");
-include_once("magazine.php");
-include_once("user.php");
-include_once("db.php");
+
+require_once(dirname(__DIR__)."/classes/books.php");
+require_once(dirname(__DIR__)."/classes/admin.php");
+require_once(dirname(__DIR__)."/classes/dvd.php");
+require_once(dirname(__DIR__)."/classes/librarian.php");
+require_once(dirname(__DIR__)."/classes/magazine.php");
+require_once(dirname(__DIR__)."/classes/user.php");
+require_once(dirname(__DIR__)."/classes/db.php");
 error_reporting(E_ALL);
 
 class Utility {

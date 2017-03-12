@@ -5,7 +5,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/login.php",
+            url: "models/loginModel.php",
             type: "POST",
             data: formData,
             contentType: false,
@@ -30,7 +30,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/login.php",
+            url: "models/loginModel.php",
             type: "POST",
             data: formData,
             contentType: false,
@@ -39,7 +39,7 @@ $(document).ready(function () {
             success: function (data) {
                 Materialize.toast(data, 4000);
             }, error: function () {
-                alert("Fallo de JS");
+                Materialize.toast("JS Failure", 4000);
             }
         });
     });

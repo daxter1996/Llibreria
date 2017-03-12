@@ -11,10 +11,8 @@ include_once "header.php";
         <div class="offset-m1 m10 offset-s0 col z-depth-2" id="profile">
             <br/>
             <?php
-            $phoroSrc = "img/noImage.png";
             $db = new DB();
-            $return = $db->returnFromBd("SELECT id FROM USER WHERE email = '" . $_SESSION["user_id"]->getEmail() . "'");
-            $fileName = glob("img/profile/profile_" . $return["id"] . ".*");
+            $fileName = glob("img/profile/profile_" . $_SESSION["user_id"]->getId() . ".*");
             if (isset($fileName[0])) {
                 echo "<div class='col s12 m4'><img class='circle responsive-img' src='" . $fileName[0] . "'></div>";
             } else {
@@ -116,7 +114,6 @@ include_once "header.php";
 <script type="text/javascript" src="controllerjs/profile.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        // the "href" attribute of .modal-trigger must specify the modal ID that wants to be triggered
         $('.modal').modal();
     });
 </script>

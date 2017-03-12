@@ -1,12 +1,10 @@
 <?php
-include_once "classes/libraryUtility.php";
+$path = "/LlibreriaTest1";
+require_once(dirname(__DIR__). $path. "/classes/libraryUtility.php");
 $library = new Utility();
 if (isset($_COOKIE["PHPSESSID"])) {
     session_start();
-}else{
-
 }
-
 ?>
 <!DOCTYPE html>
 <html>

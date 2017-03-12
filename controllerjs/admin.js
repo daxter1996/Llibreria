@@ -7,7 +7,7 @@
 /*Suggest Delete Items*/
 $(document).ready(function () {
     $("#listSuggest").keyup(function () {
-        $.get("models/admin.php", {action: "suggestRemoveItem",removeItems: $("#listSuggest").val()}, function (data) {
+        $.get("models/adminModel.php", {action: "suggestRemoveItem",removeItems: $("#listSuggest").val()}, function (data) {
             $("datalist").empty();
             $("datalist").html(data);
         })
@@ -17,7 +17,7 @@ $(document).ready(function () {
 /*Delete Item*/
 $(document).ready(function () {
     $("#deleteItemBtnId").click(function () {
-        $.get("models/admin.php", {info: $("#listSuggest").val(), action: "removeItem", controller: "session"}, function (data) {
+        $.get("models/adminModel.php", {info: $("#listSuggest").val(), action: "removeItem", controller: "session"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
@@ -26,7 +26,7 @@ $(document).ready(function () {
 /*Delete Users Suggest*/
 $(document).ready(function () {
     $("#userListSuggest").keyup(function () {
-        $.get("models/admin.php", {action: "suggestRemoveUser",deleteUserList: $("#userListSuggest").val()}, function (data) {
+        $.get("models/adminModel.php", {action: "suggestRemoveUser",deleteUserList: $("#userListSuggest").val()}, function (data) {
             $("datalist").empty();
             $("datalist").html(data);
         })
@@ -36,7 +36,7 @@ $(document).ready(function () {
 /*Delete User*/
 $(document).ready(function () {
     $("#deleteUserBtn").click(function () {
-        $.get("models/admin.php", {info: $("#userListSuggest").val(), action: "deleteUser", controller: "session"}, function (data) {
+        $.get("models/adminModel.php", {info: $("#userListSuggest").val(), action: "deleteUser", controller: "session"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
@@ -46,7 +46,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#returnTodayBtn").click(function () {
-        $.get("models/admin.php", {returnInfo: true, action: "returnInfo"}, function (data) {
+        $.get("models/adminModel.php", {returnInfo: true, action: "returnInfo"}, function (data) {
             $("#returnList").empty();
             $("#returnList").html(data);
         })
@@ -57,7 +57,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#makeAdminBtn").click(function () {
-        $.get("models/admin.php", {info: $("#userListSuggest").val(), action: "makeAdmin", controller: "session"}, function (data) {
+        $.get("models/adminModel.php", {info: $("#userListSuggest").val(), action: "makeAdmin", controller: "session"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#makePeasantBtn").click(function () {
-        $.get("models/admin.php", {info: $("#userListSuggest").val(), action: "makePeasant", controller: "session"}, function (data) {
+        $.get("models/adminModel.php", {info: $("#userListSuggest").val(), action: "makePeasant", controller: "session"}, function (data) {
             Materialize.toast(data, 4000);
         })
     })
@@ -78,7 +78,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/admin.php",
+            url: "models/adminModel.php",
             type: "POST",
             data: formData,
             mimeTypes: "multipart/form-data",
@@ -101,7 +101,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/admin.php",
+            url: "models/adminModel.php",
             type: "POST",
             data: formData,
             contentType: false,
@@ -123,7 +123,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/admin.php",
+            url: "models/adminModel.php",
             type: "POST",
             data: formData,
             contentType: false,

@@ -1,7 +1,7 @@
 <?php
 
-include_once("person.php");
-include_once("libraryUtility.php");
+require_once(dirname(__DIR__)."/classes/person.php");
+require_once(dirname(__DIR__)."/classes/libraryUtility.php");
 
 class librarian extends person {
 

@@ -4,11 +4,11 @@ $llibre = $library->getBookById($_GET["id"])
 ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <div class="col s12 offset-m1 m4">
             <?php
-            $fileName = glob("img/item/content_" . $llibre->getId() . ".*");
+            $fileName =  glob("img/item/content_" . $llibre->getId() . ".*");
             echo "<img class='col s12' src='" . $fileName[0] . "'>";
             ?>
         </div>
@@ -51,7 +51,7 @@ $llibre = $library->getBookById($_GET["id"])
                 }
             } else {
                 echo "<a disabled href='#booking' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>bookmark</i>Booking</a>";
-                echo "<a href='login.php' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>check</i>Login</a>";
+                echo "<a href='loginModel.php' class='waves-effect waves-light btn blue-grey darken-1' style='margin: 5px;'><i class='material-icons left'>check</i>Login</a>";
             }
             ?>
         </div>

@@ -1,7 +1,7 @@
 <?php include_once "header.php"; ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <form method="post" class="col m8 s12 offset-m2" id="register">
             <h1>Register</h1>

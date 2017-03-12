@@ -8,7 +8,7 @@ $res = $db->returnArrayFrombd($reservations);
 ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <div class="col s12 center">
             <h3>History of <?php echo $info["name"] ?></h3>

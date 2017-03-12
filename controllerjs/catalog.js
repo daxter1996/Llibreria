@@ -6,7 +6,7 @@
 
 $(document).ready(function () {
     $("#searchIn").keyup(function () {
-        $.get("models/catalog.php", {action: "searchItem",searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
+        $.get("models/catalogModel.php", {action: "searchItem",searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
             $("#searchResult").empty();
             $("#searchResult").html(data);
         })
@@ -15,7 +15,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
     $("#search1").mouseleave(function () {
-        $.get("models/catalog.php", {action: "searchItem", searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
+        $.get("models/catalogModel.php", {action: "searchItem", searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
             $("#searchResult").empty();
             $("#searchResult").html(data);
         })
@@ -29,7 +29,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/catalog.php",
+            url: "models/catalogModel.php",
             type: "POST",
             data: formData,
             contentType: false,
@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     $(document).ready(function () {
         $("#returnBookBtn").click(function () {
-            $.get("models/catalog.php", {controller: "session",action: "returnBook", info: $("#idBook").val()}, function (data) {
+            $.get("models/catalogModel.php", {controller: "session",action: "returnBook", info: $("#idBook").val()}, function (data) {
                 Materialize.toast(data,4000);
                 setTimeout(function() {
                     location.reload();
@@ -65,7 +65,7 @@ $(document).ready(function () {
 
     $(document).ready(function () {
         $("#cancelBookBtn").click(function () {
-            $.get("models/catalog.php", {controller: "session", action: "cancelBook", info: $("#idBook").val()}, function (data) {
+            $.get("models/catalogModel.php", {controller: "session", action: "cancelBook", info: $("#idBook").val()}, function (data) {
                 Materialize.toast(data,1000);
                 setTimeout(function() {
                     location.reload();
@@ -79,7 +79,7 @@ $(document).ready(function () {
 $(document).ready(function () {
     $("#returnList").click(function () {
         var id = $(this).attr("href").split("#");
-        $.get("models/catalog.php", {action: "returnBook",info: id[1], controller: "session"}, function (data) {
+        $.get("models/catalogModel.php", {action: "returnBook",info: id[1], controller: "session"}, function (data) {
             Materialize.toast(data,2000);
             if(data == "Thanks!"){
                 setTimeout(function () {

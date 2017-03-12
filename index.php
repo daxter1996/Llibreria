@@ -1,7 +1,7 @@
 <?php include_once "header.php"; ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <div class="col s12 m10 offset-m1 center">
             <img src="img/logo.png" style="height: 100px;" class="responsive-img">

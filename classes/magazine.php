@@ -1,6 +1,6 @@
 <?php
 
-include_once("item.php");
+require_once(dirname(__DIR__)."/classes/item.php");
 
 class magazine extends item {
 

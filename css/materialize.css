@@ -4,8 +4,8 @@
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
 
-body{
-  min-height: 800px;
+.alturaMinima{
+  min-height:650px;
 }
 
 .img-navegacio{

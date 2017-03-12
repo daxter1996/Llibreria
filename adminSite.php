@@ -90,7 +90,7 @@ include_once "header.php";
                         <input class="aves-effect waves-light btn blue-grey darken-1" id="makeAdminBtn" type="submit"
                                name="makeAdmin" class="validate" value="Make Admin">
                         <input class="aves-effect waves-light btn blue-grey darken-1" id="makePeasantBtn" type="submit"
-                               name="makePeasant" class="validate" value="Make Peasant">
+                               name="makePeasant" class="validate" value="Make User">
                     </div>
                 </div>
             </div>

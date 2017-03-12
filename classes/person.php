@@ -1,5 +1,5 @@
 <?php
-require_once("db.php");
+require_once(dirname(__DIR__)."/classes/db.php");
 
     abstract class person{
         protected $id;

@@ -6,7 +6,7 @@ $books = $db->returnArrayFrombd($sql);
 ?>
 <body>
 <br/>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="row">
         <div class="col s12 center">
             <h4><strong><?php echo $_SESSION["user_id"]->getName() ?></strong>, you have booked this books.</h4>

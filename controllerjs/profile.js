@@ -8,7 +8,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/profile.php",
+            url: "models/profileModel.php",
             type: "POST",
             data: formData,
             mimeTypes: "multipart/form-data",
@@ -36,7 +36,7 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = new FormData(this);
         $.ajax({
-            url: "models/profile.php",
+            url: "models/profileModel.php",
             type: "POST",
             data: formData,
             contentType: false,

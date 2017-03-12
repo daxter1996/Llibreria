@@ -5,7 +5,7 @@
 /*History Users Suggest*/
 $(document).ready(function () {
     $("#userListSuggest").keyup(function () {
-       $.get("models/librarian.php", {info: $("#userListSuggest").val(), action: "suggestHistoryUser"}, function (data) {
+       $.get("models/librarianModel.php", {info: $("#userListSuggest").val(), action: "suggestHistoryUser"}, function (data) {
             $("#userHistorySearch").empty();
             $("#userHistorySearch").html(data);
         })

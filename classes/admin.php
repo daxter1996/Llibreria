@@ -1,7 +1,7 @@
 <?php
 
-require_once("person.php");
-require_once("libraryUtility.php");
+require_once(dirname(__DIR__) . "/classes/person.php");
+require_once(dirname(__DIR__) . "/classes/libraryUtility.php");
 
 
 class admin extends person
@@ -62,12 +62,13 @@ class admin extends person
 
     function registerUser($post)
     {
-        $query = "INSERT INTO user VALUES ('','" . $post["name"] . "','" . $post["surname"] . "','" . $post["email"] . "','" . $post["password"] . "','" . $post["address"] . "','" . $post["dni"] . "','" . $post["userType"] . "')";
+        $hashPasswd = password_hash($post["password"], PASSWORD_DEFAULT);
+        $query = "INSERT INTO user VALUES ('','" . $post["name"] . "','" . $post["surname"] . "','" . $post["email"] . "','" . $hashPasswd . "','" . $post["address"] . "','" . $post["dni"] . "','" . $post["userType"] . "')";
         $db = new DB();
         if ($db->insertBd($query)) {
             return "User Registered!";
         } else {
-                return "Register Error";
+            return "Register Error";
         }
     }
 
@@ -85,16 +86,16 @@ class admin extends person
     function removeItem($id1)
     {
         $id = end(explode("=", $id1));
+        $route = dirname(__DIR__) . "/img/item/";
+        $glob = glob($route . "*_" . $id . ".*");
         $db = new DB();
         $sql = "INSERT INTO deleteditems SELECT * FROM items WHERE id = " . $id;
         $sql2 = "DELETE FROM items WHERE id = " . $id;
         if ($db->insertBd($sql) && $db->insertBd($sql2)) {
-            $route = "../img/item/";
-            $glob = glob($route . "*_" . $id . ".*");
             if (!empty($glob)) {
                 foreach ($glob as $value) {
                     $ex = explode("/", $value);
-                    rename($value, $route . "/deleted/" . end($ex));
+                    rename($value, $route . "deleted/" . end($ex));
                 }
             }
             return "Item removed " . $id;
@@ -103,21 +104,20 @@ class admin extends person
         }
     }
 
-    function settings($post){
+    function settings($post)
+    {
         $route = "../settings/settings.txt";
-
-        $tmp = "borrow=". $post["borrow"] . PHP_EOL;
-        $tmp .= "protection=med,". $post["mediumProtection"] . ";high," . $post["highProtection"]. ";low," . $post["lowProtection"] . PHP_EOL;
-        $tmp .= "lending=dvd,". $post["dvd"] . ";book," . $post["book"]. ";magazine," . $post["magazine"] . PHP_EOL;
-        $tmp .= "penality=". $post["penalty"] . PHP_EOL;
-
-
+        $tmp = "borrow=" . $post["borrow"] . PHP_EOL;
+        $tmp .= "protection=med," . $post["mediumProtection"] . ";high," . $post["highProtection"] . ";low," . $post["lowProtection"] . PHP_EOL;
+        $tmp .= "lending=dvd," . $post["dvd"] . ";book," . $post["book"] . ";magazine," . $post["magazine"] . PHP_EOL;
+        $tmp .= "penality=" . $post["penalty"] . PHP_EOL;
         $file = fopen($route, "wb");
-        fwrite($file,$tmp);
+        fwrite($file, $tmp);
         fclose($file);
-        echo ("The settings has been changed correctly");
+        echo("The settings has been changed correctly");
     }
 
 
 }
+
 ?>
