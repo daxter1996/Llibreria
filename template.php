@@ -97,7 +97,9 @@ $llibre = $library->getBookById($_GET["id"])
 
         $('.tooltipped').tooltip({delay: 50});
     });
+
     var url = "js/blockdates.php?id=" + <?php echo $_GET["id"]?>;
+
     $.getJSON(url, function (data1) {
         console.log(data1);
         $('.datepicker').pickadate({

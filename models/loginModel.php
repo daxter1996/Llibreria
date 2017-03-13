@@ -3,7 +3,9 @@ require_once(dirname(__DIR__) . "/classes/libraryUtility.php");
 $library = new Utility();
 sessionStart();
 
-if (isset($_POST)) {
+/*Dynamic Call*/
+
+if (isset($_POST["action"])) {
     echo $_POST["action"]();
 } else {
     echo "No action found";

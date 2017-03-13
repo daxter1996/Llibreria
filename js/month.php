@@ -1,22 +1,5 @@
 <?php
 require_once ("../classes/db.php");
-
-$months = array(
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July ',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-);
-$array1 = array();
-
 $db = new DB();
 if(isset($_GET["id"])){
     $sql = "SELECT COUNT(idbook) as y, MONTH(booked.outDay) as x FROM booked where idBook = " . $_GET["id"] . " GROUP BY MONTH(booked.outDay)";
@@ -29,8 +12,22 @@ if(!isset($_GET["userId"]) && !isset($_GET["id"])){
 }
 
 $result = $db->returnArrayFrombd($sql);
+$array = array();
+$month = date("m");
 
-$json = json_encode($result,JSON_NUMERIC_CHECK);
+for($i = 1;$i<=$month;$i++){
+    foreach ($result as $value){
+        if($value["x"] == $i){
+            array_push($array, $value);
+            break;
+        }else{
+            array_push($array, array( "y" => 0, "x" => $i));
+            break;
+        }
+    }
+}
+
+$json = json_encode($array,JSON_NUMERIC_CHECK);
 echo $json;
 ?>
 

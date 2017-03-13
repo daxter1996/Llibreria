@@ -9,9 +9,9 @@ $(document).ready(function () {
         $.get("models/catalogModel.php", {action: "searchItem",searchName: $("#searchIn").val(), searchType: $("#searchOption").val()}, function (data) {
             $("#searchResult").empty();
             $("#searchResult").html(data);
-        })
-    })
-})
+        });
+    });
+});
 
 $(document).ready(function () {
     $("#search1").mouseleave(function () {

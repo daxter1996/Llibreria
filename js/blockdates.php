@@ -3,11 +3,7 @@ require_once ("../classes/db.php");
 $db = new DB();
 $sql = "SELECT * FROM booked where idBook = " . $_GET["id"];
 $array = array();
-
 $result = $db->returnArrayFrombd($sql);
-/*echo "<pre>";
-echo print_r($result);
-echo "</pre>";*/
 foreach ($result as $value){
     if($value["returned"] != "0000-00-00"){
         $partsFrom = explode("-", $value["outDay"]);

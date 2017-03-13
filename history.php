@@ -28,7 +28,7 @@ $info = $db->returnArrayFrombd($sql);
                 $time2 = new DateTime($date2);
                 $returned = new DateTime($returnDate);
                 $atTime = "";
-                if($time1 < $returned){
+                if($time2 > $returned){
                     $atTime = "green-text";
                 }else{
                     $atTime = "red-text";
@@ -37,7 +37,8 @@ $info = $db->returnArrayFrombd($sql);
                 echo "<strong>User Email: </strong>". $value["email"];
                 echo "<br/><strong>Out Day: </strong>". $value["outDay"];
                 echo "<br/><strong>In Day: </strong>". $value["inDay"];
-                echo "<br/><span class='". $atTime ."'>".$time1->diff($time2)->format('Rented for %a Days')."</span>";
+                echo "<br/><strong class='". $atTime ."'>Returned Day: </strong>". $value["returned"];
+                echo "<br/><span class='". $atTime ."'>".$time1->diff($returned)->format('Rented for %a Days')."</span>";
                 echo "<hr/>";
             }
             ?>
