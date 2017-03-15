@@ -28,7 +28,7 @@ function searchItem()
             echo "<div class='card'>";
             echo "<div class='card-image'>";
             $fileName = glob("../img/item/portada_" . $value->getId() . ".*");
-            echo "<img src='" . str_replace("../", "", $fileName[0]) . "'>";
+            echo "<img style='height: 200px;' src='" . str_replace("../", "", $fileName[0]) . "'>";
             echo "</div>";
             echo "<div class='card-content'style='min-height: 300px;'>";
             echo "<h5>" . $value->getTitle() . "</h5>";

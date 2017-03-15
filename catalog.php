@@ -35,7 +35,7 @@
                 echo "<div class='card'>";
                 echo "<div class='card-image'>";
                 $fileName = glob("img/item/portada_" . $value->getId() . ".*");
-                echo "<img src='" . $fileName[0] . "'>";
+                echo "<img style='height: 200px;' src='" . $fileName[0] . "'>";
                 echo "</div>";
                 echo "<div class='card-content'style='min-height: 300px;'>";
                 echo "<h5>" . $value->getTitle() . "</h5>";

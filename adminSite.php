@@ -144,7 +144,7 @@ include_once "header.php";
                         </div>
 
                         <div class="input-field col s12">
-                            <input placeholder="ISBN" id="isbnIn" type="text" class="validate" name="isbn" required>
+                            <input placeholder="ISBN" id="isbnIn" type="text" class="validate" name="isbn">
                             <label for="isbnIn">ISBN</label>
                         </div>
 
