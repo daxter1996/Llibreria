@@ -17,11 +17,10 @@ $(document).ready(function () {
             processData: false,
             success: function (data) {
                 Materialize.toast(data, 2000);
-                if(data == "Edit Ok") {
                     setTimeout(function () {
+                        if ('Navigator' == navigator.appName) document.forms[0].reset();
                         window.location.reload("userTemplate.php");
                     }, 1000);
-                }
             }, error: function () {
                 alert("Fallo de JS");
             }
@@ -43,10 +42,10 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
-                Materialize.toast(data, 2000);
+                Materialize.toast(data, 1500);
                 if(data == "Account Deleted :("){
                     setTimeout(function () {
-                        window.location.reload("index.php");
+                        window.location.replace("close.php");
                     },2000);
                 }
             }, error: function () {

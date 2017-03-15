@@ -39,10 +39,10 @@ class admin extends person
     public function makePeasant($email)
     {
         $bd = new DB();
-        $query = "UPDATE user SET usertype = 'peasant' where email = '" . $email . "'";
+        $query = "UPDATE user SET usertype = 'user' where email = '" . $email . "'";
         try {
             $bd->insertBd($query);
-            return "The user with email " . $email . " is now peasant";
+            return "The user with email " . $email . " is now user";
         } catch (mysqli_sql_exception $e) {
             return $e;
         }

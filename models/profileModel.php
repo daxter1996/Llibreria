@@ -21,8 +21,6 @@ function deleteAcc(){
     $sql = "delete from user  where email = '".$_SESSION["user_id"]->getEmail()."'";
     if ($_POST["email"] == $_SESSION["user_id"]->getEmail()){
         if ($db->insertBd($sql)){
-            session_unset();
-            session_destroy();
             return "Account Deleted :(";
         }else{
             return "Error";
