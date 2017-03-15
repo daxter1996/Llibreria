@@ -47,6 +47,7 @@ function searchItem()
             echo "</div>";
         }
         exit();
+
     } else {
         if ($_GET["searchType"] == "author") {
             $arraySearch = $library->findBookByAuthor($_GET["searchName"]);
