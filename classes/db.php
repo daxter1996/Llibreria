@@ -15,10 +15,14 @@ class DB
 
     function bdConect()
     {
-        $servername = "localhost";
+        /*$servername = "localhost";
         $username = "root";
         $password = "";
-        $dbname = "testLlibreria";
+        $dbname = "testLlibreria";*/
+        $servername = "pytxy.ddns.net";
+        $username = "jesus";
+        $password = "X9SCPnH9m82f";
+        $dbname = "jesus";
         $conn = new mysqli($servername, $username, $password, $dbname);
         if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
