@@ -130,7 +130,12 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
-                Materialize.toast(data, 4000);
+                Materialize.toast("Settings has been changed!", 2000);
+                setTimeout(function () {
+                    if(data == "true"){
+                        window.location.replace("adminSite.php#changeSettings");
+                    }
+                },2000);
             }, error: function () {
                 alert("Fallo de JS");
             }

@@ -26,17 +26,17 @@ $llibre = $library->getBookById($_GET["id"])
         <div class="col s12 m6 offset-m1">
             <input type="hidden" value="<?php echo $_GET["id"] ?>" id="idBook">
             <?php
-            $db = new DB();
-            $sql = "select * from booked where idBook = " . $_GET["id"]. " and returned = false and idUser = " . $_SESSION["user_id"]->getId();
-            $result = $db->returnFromBd($sql);
-
-            $time = strtotime($result["outDay"]);
-            $time2 = strtotime($result["inDay"]);
-
-            $actual = new DateTime(date('Y-m-d'));
-            $datet = new DateTime(date("Y-m-d",$time));
-            $datet2 = new DateTime(date("Y-m-d",$time2));
             if (isset($_SESSION["user_id"])) {
+                $db = new DB();
+                $sql = "select * from booked where idBook = " . $_GET["id"]. " and returned = false and idUser = " . $_SESSION["user_id"]->getId();
+                $result = $db->returnFromBd($sql);
+
+                $time = strtotime($result["outDay"]);
+                $time2 = strtotime($result["inDay"]);
+
+                $actual = new DateTime(date('Y-m-d'));
+                $datet = new DateTime(date("Y-m-d",$time));
+                $datet2 = new DateTime(date("Y-m-d",$time2));
                 if ($result != null && $_SESSION["user_id"]->getId() == $result["idUser"]) {
                     if($actual >= $datet && $actual <= $datet2){
                         echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";

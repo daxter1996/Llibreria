@@ -5,7 +5,7 @@ include_once "header.php";
     }
 ?>
 <body>
-<div class="containter">
+<div class="containter alturaMinima">
     <div class="col s12">
         <ul class="tabs blue-grey">
             <li class="tab col s6"><a class="active" href="#manageUsers">Manage Users</a></li>
@@ -15,7 +15,7 @@ include_once "header.php";
     </div>
 
     <div class="col s12">
-        <div class="col s12 s12" id="returnToday">
+        <div class="col s12 s12 alturaMinima" id="returnToday">
             <div id="returnList" class="row" style="margin: 10px">
 
             </div>
@@ -31,7 +31,7 @@ include_once "header.php";
                 </ul>
             </div>
             <div class="row" style="margin: 10px">
-                <div id="registerUser" class="col s12 m10 offset-l1">
+                <div id="registerUser" class="col s12 m10 offset-l1 alturaMinima">
                     <h5 class="center">Register User</h5>
                     <form method="post" id="registerUserAdmin" onsubmit="return false">
                         <input type="hidden" name="action" value="registerUser">
@@ -76,7 +76,7 @@ include_once "header.php";
             </div>
 
             <div class="row">
-                <div id="deleteUser" class="col s12 m9 offset-l1">
+                <div id="deleteUser" class="col s12 m9 offset-l1 alturaMinima">
                     <h5 class="center">Delete User</h5>
                     <div class="input-field col s12">
                         <input type="text" list="userList" id="userListSuggest" class="validate">
@@ -107,7 +107,7 @@ include_once "header.php";
             </div>
 
             <div id="addElement" class="row">
-                <div class="col s12 m9 offset-l1">
+                <div class="col s12 m9 offset-l1 alturaMinima">
                     <h5 class="center">Add Element</h5>
 
                     <form enctype="multipart/form-data" id="add" method="post" onsubmit="return false">
@@ -200,7 +200,7 @@ include_once "header.php";
             </div>
 
             <div class="row" id="deleteElement">
-                <div class="col s12 m9 offset-l1">
+                <div class="col s12 m9 offset-l1 alturaMinima">
                     <h5 class="center">Delate Element</h5>
                     <div class="input-field col s12">
                         <input type="text" list="itemList" name="removeItems" id="listSuggest" class="validate">
@@ -220,11 +220,12 @@ include_once "header.php";
                     require_once("models/settings.php");
                 ?>
 
-                <div class="col s12 m9 offset-l1">
+                <div class="col s12 m9 offset-l1 alturaMinima">
                     <h5 class="center">Settings</h5>
                     <form method="post" id="settings" onsubmit="return false">
                         <div class="row">
                             <input type="hidden" name="action" value="settings">
+                            <input type="hidden" name="controller" value="session">
                             <div class="input-field col s12">
                                 <input id="borrow" name="borrow" type="text" class="validate" value="<?php echo $borrow?>">
                                 <label for="borrow">Borrow</label>

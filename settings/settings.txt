@@ -1,4 +1,4 @@
-borrow=3
-protection=med,10;high,6;low,25
-lending=dvd,high;book,med;magazine,low
+borrow=4
+protection=med,10;high,5;low,15
+lending=dvd,med;book,med;magazine,high
 penality=20

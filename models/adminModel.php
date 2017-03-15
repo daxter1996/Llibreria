@@ -36,7 +36,7 @@ function suggestRemoveUser()
 function returnInfo()
 {
     $db = new DB();
-    $sql = "SELECT items.id,title,user.email FROM booked inner join items  INNER join user where inDay = curdate() and idBook = items.id and idUser = user.id";
+    $sql = "SELECT items.id,title,user.email FROM booked inner join items  INNER join user where inDay = curdate() and idBook = items.id and idUser = user.id and returned = false";
     $array = $db->returnArrayFrombd($sql);
     if (empty($array)) {
         echo "<h4 class='center'>Nothing to return Today</h4>";

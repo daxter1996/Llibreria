@@ -114,7 +114,7 @@ class admin extends person
         $file = fopen($route, "wb");
         fwrite($file, $tmp);
         fclose($file);
-        echo("The settings has been changed correctly");
+        return "true";
     }
 
 
