@@ -25,6 +25,7 @@ function searchItem()
     if ($_GET["searchName"] == "") {
         foreach ($library->getContent() as $value) {
             echo "<div class='col s12 m3'>";
+
             echo "<div class='card'>";
             echo "<div class='card-image'>";
             $fileName = glob("../img/item/portada_" . $value->getId() . ".*");
