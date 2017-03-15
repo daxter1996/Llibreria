@@ -85,7 +85,8 @@ class admin extends person
 
     function removeItem($id1)
     {
-        $id = end(explode("=", $id1));
+        $id = explode("=", $id1);
+        $id = end($id);
         $route = dirname(__DIR__) . "/img/item/";
         $glob = glob($route . "*_" . $id . ".*");
         $db = new DB();

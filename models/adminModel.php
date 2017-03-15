@@ -73,15 +73,21 @@ function addElement()
     $check = getimagesize($_FILES["inPhoto"]["tmp_name"]);
     $check1 = getimagesize($_FILES["mainPhoto"]["tmp_name"]);
 
-    $target_dir = "../img/item/";
+    $target_dir = dirname(__DIR__) . "/img/item/";
 
-    $file_ext = strtolower(end(explode('.', $_FILES['mainPhoto']['name'])));
+    $file_ext1 = explode('.', $_FILES['mainPhoto']['name']);
+    $file_ext1 = end($file_ext1);
+    $file_ext1 = strtolower($file_ext1);
+
+    $file_ext2 = explode('.', $_FILES['mainPhoto']['name']);
+    $file_ext2 = end($file_ext2);
+    $file_ext2 = strtolower($file_ext2);
 
     if ($check !== false && $check1 !== false) {
-        $target_file_content = $target_dir . "content_" . $return["id"] . '.' . $file_ext;
-        $target_file_main = $target_dir . "portada_" . $return["id"] . '.' . $file_ext;
-        chmod($target_file_content, 0777);
-        chmod($target_file_main, 0777);
+        $target_file_content = $target_dir . "content_" . $return["id"] . '.' . $file_ext1;
+        $target_file_main = $target_dir . "portada_" . $return["id"] . '.' . $file_ext2;
+        /*chmod($target_file_content, 0777);
+        chmod($target_file_main, 0777);*/
         if (file_exists($target_file_main) || file_exists($target_file_content)) {
             unlink($target_file_main);
             unlink($target_file_content);

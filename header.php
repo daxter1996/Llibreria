@@ -1,5 +1,5 @@
 <?php
-$path = "/LlibreriaTest1";
+$path = "/Llibreria";
 require_once(dirname(__DIR__). $path. "/classes/libraryUtility.php");
 $library = new Utility();
 if (isset($_COOKIE["PHPSESSID"])) {

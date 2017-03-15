@@ -34,13 +34,14 @@ function uploadPhoto()
 {
     $check = getimagesize($_FILES["profilePhoto"]["tmp_name"]);
     $target_dir = dirname(__DIR__) . "/img/profile/";
+
     $fileName = explode('.',  $_FILES['profilePhoto']['name']);
-    $fds = end($fileName);
-    $file_ext = strtolower($fds);
+    $fileName = end($fileName);
+    $fileName = strtolower($fileName);
 
     if ($check !== false) {
-        $target_file_content = $target_dir . "profile_" . $_SESSION["user_id"]->getId() . '.' . $file_ext;
-        chmod($target_file_content, 0777);
+        $target_file_content = $target_dir . "profile_" . $_SESSION["user_id"]->getId() . '.' . $fileName;
+        /*chmod($target_file_content, 0777);*/
         if (file_exists($target_file_content)) {
             unlink($target_file_content);
         }

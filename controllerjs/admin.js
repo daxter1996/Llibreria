@@ -86,7 +86,7 @@ $(document).ready(function () {
             cache: false,
             processData: false,
             success: function (data) {
-                Materialize.toast(data, 4000);
+                Materialize.toast("Added " + data, 4000);
             }, error: function () {
                 alert("okey");
             }
