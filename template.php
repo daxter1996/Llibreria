@@ -40,8 +40,10 @@ $llibre = $library->getBookById($_GET["id"])
                 if ($result != null && $_SESSION["user_id"]->getId() == $result["idUser"]) {
                     if($actual >= $datet && $actual <= $datet2){
                         echo "<a id='returnBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Return book</a>";
+                        echo "<strong> Return Book on </strong>" . $result["inDay"];
                     }else{
                         echo "<a id='cancelBookBtn' style='margin-left: 5px' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Cancel book</a>";
+                        echo "<strong> Return Book on </strong>" . $result["inDay"];
                     }
                 }else{
                     echo "<a href='#booking' class='waves-effect waves-light btn blue-grey darken-1'><i class='material-icons left'>bookmark</i>Booking</a>";

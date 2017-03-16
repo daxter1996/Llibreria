@@ -1,10 +1,10 @@
 <?php include_once "header.php"; ?>
 <?php
-$sql = "SELECT * from USER WHERE id = " . $_GET["id"];
-$reservations = "SELECT * FROM booked inner join items INNER join user where idBook = items.id and idUser = user.id and idUser = " . $_GET["id"];
-$db = new DB();
-$info = $db->returnFromBd($sql);
-$res = $db->returnArrayFrombd($reservations);
+    $sql = "SELECT * FROM user WHERE id = " . $_GET["id"];
+    $reservations = "SELECT * FROM booked inner join items INNER join user where idBook = items.id and idUser = user.id and idUser = " . $_GET["id"];
+    $db = new DB();
+    $info = $db->returnFromBd($sql);
+    $res = $db->returnArrayFrombd($reservations);
 ?>
 <body>
 <br/>
@@ -24,24 +24,24 @@ $res = $db->returnArrayFrombd($reservations);
             <h5 class="center">All</h5>
             <hr/>
             <?php
-                foreach ($res as $value){
-                    $time = strtotime($value["outDay"]);
-                    $time2 = strtotime($value["inDay"]);
-                    $date1 = date("Y-m-d",$time);
-                    $date2 = date("Y-m-d",$time2);
-                    $datet = new DateTime($date1);
-                    $datet2 = new DateTime($date2);
-                    echo "<strong>Title: </strong>" . $value["title"];
-                    echo "<br/>";
-                    echo "<strong>ID: </strong>" . $value["id"];
-                    echo "<br/>";
-                    echo "<strong>Out Day: </strong>" . $value["outDay"];
-                    echo "<br/>";
-                    echo "<strong>In Day: </strong>" . $value["inDay"];
-                    echo "<br/>";
-                    echo $datet->diff($datet2)->format('Rent for %a Days');
-                    echo "<hr/>";
-                }
+            foreach ($res as $value) {
+                $time = strtotime($value["outDay"]);
+                $time2 = strtotime($value["inDay"]);
+                $date1 = date("Y-m-d", $time);
+                $date2 = date("Y-m-d", $time2);
+                $datet = new DateTime($date1);
+                $datet2 = new DateTime($date2);
+                echo "<strong>Title: </strong>" . $value["title"];
+                echo "<br/>";
+                echo "<strong>ID: </strong>" . $value["id"];
+                echo "<br/>";
+                echo "<strong>Out Day: </strong>" . $value["outDay"];
+                echo "<br/>";
+                echo "<strong>In Day: </strong>" . $value["inDay"];
+                echo "<br/>";
+                echo $datet->diff($datet2)->format('Rent for %a Days');
+                echo "<hr/>";
+            }
             ?>
         </div>
     </div>

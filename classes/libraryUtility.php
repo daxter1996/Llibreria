@@ -107,4 +107,20 @@ class Utility {
         }
         return $array;
     }
+
+    public function getLastFromDB($num){
+        $db = new DB();
+        $sql = "SELECT * FROM items ORDER by id DESC limit " . $num;
+        $result = $db->returnArrayFrombd($sql);
+        foreach ($result as $row){
+            if ($row["type"] == 1) {
+                array_push($this->content, new books($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
+            } elseif ($row["type"] == 2) {
+                array_push($this->content, new dvd($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["description"]));
+            } elseif ($row["type"] == 3) {
+                array_push($this->content, new magazine($row["id"], $row["title"], $row["author"], $row["subject"], $row["company"], $row["year"], $row["editionNumber"], $row["state"], $row["ISBN"], $row["description"]));
+            }
+        }
+    }
+
 }//End Of Class

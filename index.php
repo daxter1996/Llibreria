@@ -11,7 +11,7 @@
     </div>
     <div class="row">
         <div class="col s12 m6 offset-m1">
-            <h3>Highlights</h3>
+            <h3>Last Additions</h3>
         </div>
     </div>
     <div class="row">
@@ -19,7 +19,8 @@
 
             <!-- Plantila vista general de un libre-->
             <?php
-            $library->getAllContentFromBd();
+            //$library->getAllContentFromBd();
+            $library->getLastFromDB(8);
             foreach ($library->getContent() as $value) {
                 echo "<div class='col s12 m3'>";
                 echo "<div class='card'>";

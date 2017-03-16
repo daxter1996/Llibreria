@@ -57,32 +57,37 @@ require_once(dirname(__DIR__)."/classes/db.php");
             $firstD = strtotime($_POST["firstD"]);
             $maxDate = strtotime(" + " . $post["maxDay"]  . "days", $firstD);
             $returnD = date('Y-m-d', $maxDate);
-            $sql1 = "Select * from booked WHERE idBook = ".$post["bookId"]." and outDay > STR_TO_DATE('".$returnD."', '%Y-%d-%m') limit 1";
+            $sql2 = "SELECT * FROM booked WHERE idBook = ".$post["bookId"]." and inDay >= STR_TO_DATE('".$_POST["firstD"]."', '%Y-%m-%d') and outDay <= STR_TO_DATE('".$_POST["firstD"]."', '%Y-%m-%d')";
+            $sql1 = "Select * from booked WHERE idBook = ".$post["bookId"]." and outDay > STR_TO_DATE('".$_POST["firstD"]."', '%Y-%m-%d') order by outDay limit 1";
             $consulta = $db->returnFromBd($sql1);
-
-            if(!empty($consulta)){
-                $returnD =  date('Y-m-d', strtotime($consulta["outDay"]. " - 1 days"));
-                if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
-                    $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$returnD."', '')";
-                    if($db->insertBd($sql)){
-                        return "Booked!";
+            $consulta1 = $db->returnFromBd($sql2);
+            if (empty($consulta1)){
+                if(!empty($consulta)){
+                    $returnD =  date('Y-m-d', strtotime($consulta["outDay"]. " - 1 days"));
+                    if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
+                        $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$returnD."', '')";
+                        if($db->insertBd($sql)){
+                            return "Booked!";
+                        }else{
+                            return "Something goes wrong";
+                        }
                     }else{
-                        return "Something goes wrong";
+                        return "Format of date invalid";
                     }
                 }else{
-                    return "Format of date invalid";
+                    if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
+                        $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$returnD."', '')";
+                        if($db->insertBd($sql)){
+                            return "Booked!";
+                        }else{
+                            return "Something goes wrong";
+                        }
+                    }else{
+                        return "Format of date invalid";
+                    }
                 }
             }else{
-                if(preg_match("/(\d{4})-(\d{2})-(\d{2})/",$_POST["firstD"])){
-                    $sql = "INSERT INTO booked VALUES ('".$_POST["bookId"]."','".$_SESSION["user_id"]->getId()."','".$_POST["firstD"]."','".$returnD."', '')";
-                    if($db->insertBd($sql)){
-                        return "Booked!";
-                    }else{
-                        return "Something goes wrong";
-                    }
-                }else{
-                    return "Format of date invalid";
-                }
+                return "Day already booked";
             }
         }
 
